@@ -42,8 +42,8 @@
 02. _<h4>Add MeshToonMaterial + DirectionalLight</h4>_
 03. _<h4>Applying a Gradient Texture to the Objects</h4>_
 04. _<h4>Move the Object across the Sections we have</h4>_
-05. _<h4>....</h4>_
-06. _<h4>....</h4>_
+05. _<h4>Rotate Objects + Move the Camera with the Scroll</h4>_
+06. _<h4>Position Object Horizontally + Create a Parallax Effect on Mouse movement</h4>_
 07. _<h4>....</h4>_
 
  How to use Three.js as a background of a classic HTML page. 
