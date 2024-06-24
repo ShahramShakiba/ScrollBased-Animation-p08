@@ -1,6 +1,5 @@
 import * as THREE from 'three';
 import GUI from 'lil-gui';
-import { color } from 'three/examples/jsm/nodes/Nodes.js';
 
 const canvas = document.querySelector('canvas.webgl');
 const scene = new THREE.Scene();
@@ -10,25 +9,33 @@ const parameters = {
   materialColor: '#ffeded',
 };
 
-gui.addColor(parameters, 'materialColor');
+gui.addColor(parameters, 'materialColor').onChange(() => {
+  material.color.set(parameters.materialColor);
+});
 
 //====================== Objects ======================
+const material = new THREE.MeshToonMaterial({
+  color: parameters.materialColor,
+});
+
 const homeMesh = new THREE.Mesh(
   new THREE.TorusGeometry(1, 0.4, 16, 60),
-  new THREE.MeshBasicMaterial({ color: '#ff0000' })
+  material
 );
 
-const projectMesh = new THREE.Mesh(
-  new THREE.ConeGeometry(1, 2, 32),
-  new THREE.MeshBasicMaterial({ color: '#ff0000' })
-);
+const projectMesh = new THREE.Mesh(new THREE.ConeGeometry(1, 2, 32), material);
 
 const contactMesh = new THREE.Mesh(
   new THREE.TorusKnotGeometry(0.8, 0.35, 100, 16),
-  new THREE.MeshBasicMaterial({ color: '#ff0000' })
+  material
 );
 
 scene.add(homeMesh, projectMesh, contactMesh);
+
+//====================== Lights =======================
+const directionalLight = new THREE.DirectionalLight('#ffffff', 3);
+directionalLight.position.set(1, 1, 0);
+scene.add(directionalLight);
 
 //====================== Camera =======================
 let width = window.innerWidth;
