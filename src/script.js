@@ -43,6 +43,10 @@ homeMesh.position.y = -objectDistance * 0; // You can remove this line
 projectMesh.position.y = -objectDistance * 1;
 contactMesh.position.y = -objectDistance * 2;
 
+homeMesh.position.x = 2;
+projectMesh.position.x = -2;
+contactMesh.position.x = 2;
+
 scene.add(homeMesh, projectMesh, contactMesh);
 
 //=== put all meshes in an array to rotate them in tick()
@@ -57,9 +61,12 @@ scene.add(directionalLight);
 let width = window.innerWidth;
 let height = window.innerHeight;
 
+const cameraGroup = new THREE.Group();
+scene.add(cameraGroup);
+
 const camera = new THREE.PerspectiveCamera(35, width / height, 0.1, 100);
 camera.position.z = 6;
-scene.add(camera);
+cameraGroup.add(camera);
 
 //===================== Renderer ======================
 const renderer = new THREE.WebGLRenderer({
@@ -90,6 +97,20 @@ window.addEventListener('scroll', () => {
   scrollY = window.scrollY;
 });
 
+//==================== Cursor =========================
+const cursor = {
+  x: 0,
+  y: 0,
+};
+
+window.addEventListener('mousemove', (event) => {
+  cursor.x = event.clientX / width - 0.5;
+  cursor.y = event.clientY / height - 0.5;
+  // normalize the value (from -0.5 to +0.5)
+
+  console.log(cursor);
+});
+
 //==================== Animate ========================
 const clock = new THREE.Clock();
 
@@ -98,6 +119,11 @@ const tick = () => {
 
   //=== Animate Camera
   camera.position.y = (-scrollY / height) * objectDistance;
+
+  const parallaxX = cursor.x;
+  const parallaxY = -cursor.y;
+  cameraGroup.position.x = parallaxX;
+  cameraGroup.position.y = parallaxY;
 
   //=== Animate Meshes
   for (const mesh of sectionMeshes) {
@@ -110,3 +136,10 @@ const tick = () => {
 };
 
 tick();
+
+/* 
+* Parallax
+- is the action of seeing one object through different observation points
+
+- This is done naturally by our eyes and it's how we feel the depth of things
+*/
