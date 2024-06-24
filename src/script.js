@@ -39,11 +39,14 @@ const contactMesh = new THREE.Mesh(
   material
 );
 
-homeMesh.position.y = -objectDistance * 0;
+homeMesh.position.y = -objectDistance * 0; // You can remove this line
 projectMesh.position.y = -objectDistance * 1;
 contactMesh.position.y = -objectDistance * 2;
 
 scene.add(homeMesh, projectMesh, contactMesh);
+
+//=== put all meshes in an array to rotate them in tick()
+const sectionMeshes = [homeMesh, projectMesh, contactMesh];
 
 //====================== Lights =======================
 const directionalLight = new THREE.DirectionalLight('#ffffff', 3);
@@ -80,11 +83,27 @@ window.addEventListener('resize', () => {
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 });
 
+//==================== Scroll =========================
+let scrollY = window.scrollY;
+
+window.addEventListener('scroll', () => {
+  scrollY = window.scrollY;
+});
+
 //==================== Animate ========================
 const clock = new THREE.Clock();
 
 const tick = () => {
   const elapsedTime = clock.getElapsedTime();
+
+  //=== Animate Camera
+  camera.position.y = (-scrollY / height) * objectDistance;
+
+  //=== Animate Meshes
+  for (const mesh of sectionMeshes) {
+    mesh.rotation.x = elapsedTime * 0.12;
+    mesh.rotation.y = elapsedTime * 0.14;
+  }
 
   renderer.render(scene, camera);
   window.requestAnimationFrame(tick);
