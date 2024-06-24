@@ -44,7 +44,8 @@
 04. _<h4>Move the Object across the Sections we have</h4>_
 05. _<h4>Rotate Objects + Move the Camera with the Scroll</h4>_
 06. _<h4>Position Object Horizontally + Create a Parallax Effect on Mouse movement</h4>_
-07. _<h4>....</h4>_
+07. _<h4>Since the parallax animation feels a bit mechanic and it's not realistic, I'm going to add some Easing (smoothing or lerping)</h4>_
+08. _<h4>....</h4>_
 
  How to use Three.js as a background of a classic HTML page. 
  Make the camera translate to follow the scroll. 
