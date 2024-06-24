@@ -113,17 +113,22 @@ window.addEventListener('mousemove', (event) => {
 
 //==================== Animate ========================
 const clock = new THREE.Clock();
+let previousTime = 0;
 
 const tick = () => {
   const elapsedTime = clock.getElapsedTime();
+  const deltaTime = elapsedTime - previousTime;
+  previousTime = elapsedTime; // update "pre" for the next frame
 
   //=== Animate Camera
   camera.position.y = (-scrollY / height) * objectDistance;
 
-  const parallaxX = cursor.x;
-  const parallaxY = -cursor.y;
-  cameraGroup.position.x = parallaxX;
-  cameraGroup.position.y = parallaxY;
+  const parallaxX = cursor.x * 0.5;
+  const parallaxY = -cursor.y * 0.5;
+  cameraGroup.position.x +=
+    (parallaxX - cameraGroup.position.x) * 5 * deltaTime;
+  cameraGroup.position.y +=
+    (parallaxY - cameraGroup.position.y) * 5 * deltaTime;
 
   //=== Animate Meshes
   for (const mesh of sectionMeshes) {
@@ -142,4 +147,17 @@ tick();
 - is the action of seeing one object through different observation points
 
 - This is done naturally by our eyes and it's how we feel the depth of things
+*/
+
+/*                                - creating an "easing" effect -
+* cameraGroup.position.x += (parallaxX - cameraGroup.position.x) * 0.02;
+  
+? if tou test the experience on a high frequency screen, the "tick" function will be called more often and the camera will move faster toward the target
+
+- we need to know how much time was spent since the last frame
+
+* cameraGroup.position.x +=
+*    (parallaxX - cameraGroup.position.x) * 0.9 * deltaTime;
+
+- with this "deltaTime", in different screen frequency we will have the same speed
 */
