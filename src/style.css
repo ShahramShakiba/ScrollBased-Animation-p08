@@ -3,9 +3,13 @@
   padding: 0;
 }
 
-html,
+/* html,
 body {
   overflow: hidden;
+} */
+
+html {
+  background: #1e1a20;
 }
 
 .webgl {
