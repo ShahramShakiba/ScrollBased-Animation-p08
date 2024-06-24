@@ -17,8 +17,11 @@ gui.addColor(parameters, 'materialColor').onChange(() => {
 const textureLoader = new THREE.TextureLoader();
 const gradientTexture = textureLoader.load('./textures/gradients/3.jpg');
 gradientTexture.magFilter = THREE.NearestFilter;
+gradientTexture.colorSpace = THREE.SRGBColorSpace;
 
 //====================== Objects ======================
+const objectDistance = 4;
+
 const material = new THREE.MeshToonMaterial({
   color: parameters.materialColor,
   gradientMap: gradientTexture,
@@ -35,6 +38,10 @@ const contactMesh = new THREE.Mesh(
   new THREE.TorusKnotGeometry(0.8, 0.35, 100, 16),
   material
 );
+
+homeMesh.position.y = -objectDistance * 0;
+projectMesh.position.y = -objectDistance * 1;
+contactMesh.position.y = -objectDistance * 2;
 
 scene.add(homeMesh, projectMesh, contactMesh);
 
