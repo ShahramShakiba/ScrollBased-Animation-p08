@@ -9,7 +9,13 @@
 
  <br/>
 
-#### _Hey everyone_ <img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Hand%20gestures/Waving%20Hand%20Medium%20Skin%20Tone.png" alt="Waving Hand Medium Skin Tone" width="25" height="25" /> <br/> _I'm gearing up to ..._
+### _Hey everyone_ <img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Hand%20gestures/Waving%20Hand%20Medium%20Skin%20Tone.png" alt="Waving Hand Medium Skin Tone" width="25" height="25" /> <br/> _Scroll-based animation can truly elevate a website's user experience by adding dynamic elements that engage and delight visitors. <img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Travel%20and%20places/Roller%20Coaster.png" alt="Roller Coaster" width="30" height="25" /> <br/><br/> By seamlessly integrating vibrant shapes and objects that respond to each scroll, you can create a visually stunning and interactive design that breathes life into your classic website._ <img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Smilies/Smirking%20Face.png" alt="Smirking Face" width="25" height="25" /> <br/><br/>  Let’s turn every scroll into a captivating adventure<img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Symbols/White%20Exclamation%20Mark.png" alt="White Exclamation Mark" width="25" height="25" />
+<br/>
+
+### You may wonder why you need it? <img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Smilies/Thinking%20Face.png" alt="Thinking Face" width="30" height="30" />
+- The beauty of scroll-based animation lies in its ability to enhance the storytelling aspect of your website.
+- As users navigate through the content, the animations can guide their journey, highlighting key information or creating a sense of progression.
+- This not only adds visual appeal but also improves the overall usability and navigation of the site.
 
 <br/>
 
