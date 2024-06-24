@@ -38,15 +38,19 @@
 
 > _Which Concepts Have I Covered_: <br/>
 
-01. _<h4>....</h4>_
-02. _<h4>....</h4>_
-03. _<h4>....</h4>_
-04. _<h4>....</h4>_
+01. _<h4>Add 3 different Objects for 3 different section</h4>_
+02. _<h4>Add MeshToonMaterial + DirectionalLight</h4>_
+03. _<h4>Applying a Gradient Texture to the Objects</h4>_
+04. _<h4>Move the Object across the Sections we have</h4>_
 05. _<h4>....</h4>_
 06. _<h4>....</h4>_
 07. _<h4>....</h4>_
 
- 
+ How to use Three.js as a background of a classic HTML page. 
+ Make the camera translate to follow the scroll. 
+ Discover some tricks to make this scroll more immersive. 
+ Add a cool parallax animation based on the cursor position. 
+ Trigger some animations when arriving at the corresponding sections.
 <br/><br/>
 
 <!-------- try it live -------->
