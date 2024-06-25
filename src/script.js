@@ -8,7 +8,7 @@ const gui = new GUI();
 
 const parameters = {
   materialColor: '#ffeded',
-  particleSize: 0.05,
+  particleSize: 1.2,
 };
 
 gui.addColor(parameters, 'materialColor').onChange(() => {
@@ -18,16 +18,15 @@ gui.addColor(parameters, 'materialColor').onChange(() => {
 
 //====================== Texture ======================
 const textureLoader = new THREE.TextureLoader();
-const gradientTexture = textureLoader.load('./textures/gradients/3.jpg');
-gradientTexture.magFilter = THREE.NearestFilter;
-gradientTexture.colorSpace = THREE.SRGBColorSpace;
+
+const triangleTexture = textureLoader.load('./textures/triangle.png');
+triangleTexture.colorSpace = THREE.SRGBColorSpace;
 
 //====================== Objects ======================
 const objectDistance = 4;
 
-const material = new THREE.MeshToonMaterial({
+const material = new THREE.MeshStandardMaterial({
   color: parameters.materialColor,
-  gradientMap: gradientTexture,
 });
 
 const homeMesh = new THREE.Mesh(
@@ -56,7 +55,7 @@ scene.add(homeMesh, projectMesh, contactMesh);
 const sectionMeshes = [homeMesh, projectMesh, contactMesh];
 
 //===================== Particles =====================
-const count = 300;
+const count = 70;
 const positions = new Float32Array(count * 3);
 
 for (let i = 0; i < count; i++) {
@@ -69,8 +68,8 @@ for (let i = 0; i < count; i++) {
   positions[i3 + 2] = (Math.random() - 0.5) * 10;
 }
 
-const ParticleGeometry = new THREE.BufferGeometry();
-ParticleGeometry.setAttribute(
+const particleGeometry = new THREE.BufferGeometry();
+particleGeometry.setAttribute(
   'position',
   new THREE.BufferAttribute(positions, 3)
 );
@@ -78,12 +77,14 @@ ParticleGeometry.setAttribute(
 const particlesMaterial = new THREE.PointsMaterial({
   size: parameters.particleSize,
   sizeAttenuation: true,
-  // depthWrite: false,
+  depthWrite: false,
   blending: THREE.AdditiveBlending,
-  color: parameters.materialColor,
+  // color: parameters.materialColor,
+  map: triangleTexture,
+  // transparent: true,
 });
 
-const particleMesh = new THREE.Points(ParticleGeometry, particlesMaterial);
+const particleMesh = new THREE.Points(particleGeometry, particlesMaterial);
 scene.add(particleMesh);
 
 //====================== Lights =======================
@@ -171,7 +172,7 @@ const tick = () => {
   const deltaTime = elapsedTime - previousTime;
   previousTime = elapsedTime; // update "pre" for the next frame
 
-  //=== Animate Camera
+  //======== Animate Camera
   camera.position.y = (-scrollY / height) * objectDistance;
 
   const parallaxX = cursor.x * 0.5;
@@ -181,11 +182,26 @@ const tick = () => {
   cameraGroup.position.y +=
     (parallaxY - cameraGroup.position.y) * 5 * deltaTime;
 
-  //=== Animate Meshes
+  //======== Animate Meshes
   for (const mesh of sectionMeshes) {
     mesh.rotation.x += deltaTime * 0.12;
     mesh.rotation.y += deltaTime * 0.14;
   }
+
+  //======== Animate Particles
+  for (let i = 0; i < count; i++) {
+    const i3 = i * 3;
+
+    particleGeometry.attributes.position.array[i3 + 1] +=
+      Math.sin(elapsedTime + i3) * 0.001; // Y
+
+    particleGeometry.attributes.position.array[i3] +=
+      Math.cos(elapsedTime + i3) * 0.002; // X
+  }
+  particleGeometry.attributes.position.needsUpdate = true;
+
+  //======== Animating particle color
+  particlesMaterial.color.setHSL(Math.sin(elapsedTime * 0.5), 0.3, 0.5);
 
   renderer.render(scene, camera);
   window.requestAnimationFrame(tick);

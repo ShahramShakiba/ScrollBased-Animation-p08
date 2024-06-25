@@ -21,17 +21,104 @@ html {
 
 .section {
   display: flex;
-  align-items: center;
   height: 100vh;
   position: relative;
   font-family: 'Cabin', sans-serif;
-  color: #ffeded;
-  text-transform: uppercase;
-  font-size: 7vmin;
   padding-left: 10%;
   padding-right: 10%;
 }
 
 section:nth-child(odd) {
   justify-content: flex-end;
+}
+
+h1,
+h2 {
+  width: fit-content;
+  flex-direction: column;
+  font-size: 9vmin;
+  color: #ffeded; /* Fallback color */
+  padding-bottom: 1rem;
+  cursor: pointer;
+  color: transparent;
+  -webkit-text-fill-color: transparent; /* Ensure the gradient shows in text */
+  transition: background-position 0.6s ease-in-out; /* Smooth transition */
+}
+
+.top {
+  width: 40%;
+  padding: 2rem;
+  margin-top: 10rem;
+}
+
+.top h1 {
+  background: linear-gradient(90deg, #f5af19, #f12711, #12c2e9, #c471ed);
+  background-size: 200%; /* To ensure the animation effect */
+  background-clip: text;
+  -webkit-background-clip: text;
+}
+
+.top h1:hover {
+  background-position: 100% 0; /* Move gradient from left to right */
+}
+
+.center {
+  width: 40%;
+  padding: 2rem;
+  margin-top: 10rem;
+}
+
+.center h2 {
+  background: linear-gradient(90deg, #ff7e5f, #feb47b, #86a8e7, #7f7fd5);
+  background-size: 200%;
+  background-clip: text;
+  -webkit-background-clip: text;
+}
+
+.center h2:hover {
+  background-position: 100% 0;
+}
+
+.bottom {
+  width: 40%;
+  padding: 2rem;
+  margin-top: 10rem;
+}
+
+.bottom h2 {
+  background: linear-gradient(90deg, #ff6a00, #ee0979, #ff56ff, #00ffff);
+  background-size: 200%;
+  background-clip: text;
+  -webkit-background-clip: text;
+  cursor: default;
+}
+
+.bottom h2:hover {
+  background-position: 100% 0;
+}
+
+.contact-links {
+  display: flex;
+  margin-top: 1.5rem;
+  gap: 1.5rem;
+}
+
+.contact-link img {
+  width: 40px;
+  height: 40px;
+  transition: transform 0.3s ease;
+}
+
+.contact-link img:hover {
+  transform: scale(1.2);
+}
+
+.top p,
+.center p,
+.bottom p {
+  color: #b3afaf;
+  font-weight: 700;
+  font-size: 1.4rem;
+  line-height: 1.8rem;
+  padding-bottom: 1rem;
 }
