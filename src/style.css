@@ -1,12 +1,11 @@
+@import url('https://fonts.googleapis.com/css2?family=Kaushan+Script&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Audiowide&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playwrite+DE+Grund:wght@100..400&display=swap');
+
 * {
   margin: 0;
   padding: 0;
 }
-
-/* html,
-body {
-  overflow: hidden;
-} */
 
 html {
   background: #1e1a20;
@@ -45,21 +44,79 @@ h2 {
   transition: background-position 0.6s ease-in-out; /* Smooth transition */
 }
 
-.top {
-  width: 40%;
-  padding: 2rem;
-  margin-top: 10rem;
+.home {
+  width: 60%;
+  padding: 2rem 1rem;
+  margin-top: 8rem;
 }
 
-.top h1 {
+.home img {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  margin: 1rem;
+  box-shadow: 0 4px 15px rgba(75, 75, 75, 0.3);
+  transition: all 0.22s ease-in;
+}
+
+.home img:hover {
+  transform: scale(1.1);
+  box-shadow: 0 4px 20px rgba(88, 82, 77, 0.5);
+}
+
+.home .header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.home .header p {
+  font-family: 'Kaushan Script', sans-serif;
+  font-weight: 500;
+  font-size: 1.5rem;
+  position: relative;
+  padding-bottom: 0.8rem;
+}
+
+.home .header p::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 1px;
+  background: currentColor;
+  transform: scaleX(1);
+  transform-origin: left;
+  transition: transform 0.5s ease;
+}
+
+.home .header p:hover::after {
+  transform: scaleX(0);
+  transform-origin: right;
+}
+
+.home .content h1 {
+  font-family: 'Audiowide', sans-serif;
+  font-size: 6vmin;
   background: linear-gradient(90deg, #f5af19, #f12711, #12c2e9, #c471ed);
   background-size: 200%; /* To ensure the animation effect */
   background-clip: text;
   -webkit-background-clip: text;
 }
 
-.top h1:hover {
-  background-position: 100% 0; /* Move gradient from left to right */
+.home h1:hover {
+  background-position: 100% 0;
+}
+
+.home .content p span {
+  color: #db756a;
+  font-weight: bold;
+  transition: color 0.3s ease-in-out;
+}
+
+.home .content p span:hover {
+  color: #12c2e9;
 }
 
 .center {
@@ -69,7 +126,7 @@ h2 {
 }
 
 .center h2 {
-  background: linear-gradient(90deg, #ff7e5f, #feb47b, #86a8e7, #7f7fd5);
+  background: linear-gradient(90deg, #43cea2, #185a9d, #f5af19, #f12711);
   background-size: 200%;
   background-clip: text;
   -webkit-background-clip: text;
@@ -113,12 +170,34 @@ h2 {
   transform: scale(1.2);
 }
 
-.top p,
+.home p,
 .center p,
 .bottom p {
-  color: #b3afaf;
-  font-weight: 700;
-  font-size: 1.4rem;
-  line-height: 1.8rem;
+  color: #c5c5c5;
+  font-size: 1.3rem;
+  line-height: 2.1rem;
   padding-bottom: 1rem;
+  font-family: 'Playwrite DE Grund', sans-serif;
+}
+
+.play-button {
+  background-color: transparent;
+  border: none;
+  border-radius: 50%;
+  padding: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  transition: transform 0.7s ease;
+  cursor: pointer;
+}
+
+.play-button img {
+  width: 54px;
+  height: 54px;
+}
+
+.play-button:hover {
+  transform: rotate(360deg);
 }

@@ -8,12 +8,11 @@ const gui = new GUI();
 
 const parameters = {
   materialColor: '#ffeded',
-  particleSize: 1.2,
+  particleSize: 1.5,
 };
 
 gui.addColor(parameters, 'materialColor').onChange(() => {
   material.color.set(parameters.materialColor);
-  particlesMaterial.color.set(parameters.materialColor);
 });
 
 //====================== Texture ======================
@@ -27,35 +26,39 @@ const objectDistance = 4;
 
 const material = new THREE.MeshStandardMaterial({
   color: parameters.materialColor,
+  
 });
 
 const homeMesh = new THREE.Mesh(
-  new THREE.TorusGeometry(1, 0.4, 16, 60),
+  new THREE.TorusGeometry(0.75, 0.35, 30),
   material
 );
 
-const projectMesh = new THREE.Mesh(new THREE.ConeGeometry(1, 2, 32), material);
+const aboutMeMesh = new THREE.Mesh(
+  new THREE.DodecahedronGeometry(1, 0),
+  material
+);
 
 const contactMesh = new THREE.Mesh(
-  new THREE.TorusKnotGeometry(0.8, 0.35, 100, 16),
+  new THREE.ConeGeometry(0.85, 1.5, 7),
   material
 );
 
 homeMesh.position.y = -objectDistance * 0; // You can remove this line
-projectMesh.position.y = -objectDistance * 1;
+aboutMeMesh.position.y = -objectDistance * 1;
 contactMesh.position.y = -objectDistance * 2;
 
 homeMesh.position.x = 2;
-projectMesh.position.x = -2;
+aboutMeMesh.position.x = -2;
 contactMesh.position.x = 2;
 
-scene.add(homeMesh, projectMesh, contactMesh);
+scene.add(homeMesh, aboutMeMesh, contactMesh);
 
 //=== put all meshes in an array to rotate them in tick()
-const sectionMeshes = [homeMesh, projectMesh, contactMesh];
+const sectionMeshes = [homeMesh, aboutMeMesh, contactMesh];
 
 //===================== Particles =====================
-const count = 70;
+const count = 1;
 const positions = new Float32Array(count * 3);
 
 for (let i = 0; i < count; i++) {
@@ -88,9 +91,12 @@ const particleMesh = new THREE.Points(particleGeometry, particlesMaterial);
 scene.add(particleMesh);
 
 //====================== Lights =======================
-const directionalLight = new THREE.DirectionalLight('#ffffff', 3);
+const directionalLight = new THREE.DirectionalLight(0x4e00ff, 5);
 directionalLight.position.set(1, 1, 0);
 scene.add(directionalLight);
+
+const ambientLight = new THREE.AmbientLight(0x00ffff, 0.2);
+scene.add(ambientLight);
 
 //====================== Camera =======================
 let width = window.innerWidth;
