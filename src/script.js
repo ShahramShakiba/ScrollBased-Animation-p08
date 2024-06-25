@@ -7,10 +7,12 @@ const gui = new GUI();
 
 const parameters = {
   materialColor: '#ffeded',
+  particleSize: 0.05,
 };
 
 gui.addColor(parameters, 'materialColor').onChange(() => {
   material.color.set(parameters.materialColor);
+  particlesMaterial.color.set(parameters.materialColor);
 });
 
 //====================== Texture ======================
@@ -51,6 +53,37 @@ scene.add(homeMesh, projectMesh, contactMesh);
 
 //=== put all meshes in an array to rotate them in tick()
 const sectionMeshes = [homeMesh, projectMesh, contactMesh];
+
+//===================== Particles =====================
+const count = 300;
+const positions = new Float32Array(count * 3);
+
+for (let i = 0; i < count; i++) {
+  const i3 = i * 3;
+
+  positions[i3] = (Math.random() - 0.5) * 10;
+  positions[i3 + 1] =
+    objectDistance * 0.5 -
+    Math.random() * objectDistance * sectionMeshes.length;
+  positions[i3 + 2] = (Math.random() - 0.5) * 10;
+}
+
+const ParticleGeometry = new THREE.BufferGeometry();
+ParticleGeometry.setAttribute(
+  'position',
+  new THREE.BufferAttribute(positions, 3)
+);
+
+const particlesMaterial = new THREE.PointsMaterial({
+  size: parameters.particleSize,
+  sizeAttenuation: true,
+  // depthWrite: false,
+  blending: THREE.AdditiveBlending,
+  color: parameters.materialColor,
+});
+
+const particleMesh = new THREE.Points(ParticleGeometry, particlesMaterial);
+scene.add(particleMesh);
 
 //====================== Lights =======================
 const directionalLight = new THREE.DirectionalLight('#ffffff', 3);
@@ -108,7 +141,7 @@ window.addEventListener('mousemove', (event) => {
   cursor.y = event.clientY / height - 0.5;
   // normalize the value (from -0.5 to +0.5)
 
-  console.log(cursor);
+  // console.log(cursor);
 });
 
 //==================== Animate ========================
