@@ -1,4 +1,5 @@
 import * as THREE from 'three';
+import gsap from 'gsap';
 import GUI from 'lil-gui';
 
 const canvas = document.querySelector('canvas.webgl');
@@ -125,9 +126,26 @@ window.addEventListener('resize', () => {
 
 //==================== Scroll =========================
 let scrollY = window.scrollY;
+let currentSection = 0;
 
 window.addEventListener('scroll', () => {
   scrollY = window.scrollY;
+
+  // Each section is one viewport height. Additional adjustments are required for longer sections.
+  const newSection = Math.round(scrollY / height);
+
+  if (newSection != currentSection) {
+    currentSection = newSection;
+    // console.log('Changed!', currentSection);
+
+    gsap.to(sectionMeshes[currentSection].rotation, {
+      duration: 1.5,
+      ease: 'power2.inOut',
+      x: '+=6',
+      y: '+=3',
+      z: '+=1.5',
+    });
+  }
 });
 
 //==================== Cursor =========================
@@ -165,8 +183,8 @@ const tick = () => {
 
   //=== Animate Meshes
   for (const mesh of sectionMeshes) {
-    mesh.rotation.x = elapsedTime * 0.12;
-    mesh.rotation.y = elapsedTime * 0.14;
+    mesh.rotation.x += deltaTime * 0.12;
+    mesh.rotation.y += deltaTime * 0.14;
   }
 
   renderer.render(scene, camera);
