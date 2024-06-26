@@ -258,7 +258,7 @@ h2 {
 }
 
 /*============ Music-Button ============*/
-@keyframes bounce {
+/* @keyframes bounce {
   0%,
   100% {
     transform: translateY(0);
@@ -266,7 +266,7 @@ h2 {
   50% {
     transform: translateY(-10px);
   }
-}
+} */
 
 .play-button {
   background-color: transparent;
@@ -278,7 +278,7 @@ h2 {
   bottom: 20px;
   left: 20px;
   cursor: pointer;
-  animation: bounce 1.4s infinite;
+  /* animation: bounce 1.4s infinite; */
 }
 
 .play-button img {

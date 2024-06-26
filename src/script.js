@@ -4,16 +4,11 @@ import GUI from 'lil-gui';
 
 const canvas = document.querySelector('canvas.webgl');
 const scene = new THREE.Scene();
-const gui = new GUI();
 
 const parameters = {
   materialColor: '#ffeded',
   particleSize: 1.5,
 };
-
-gui.addColor(parameters, 'materialColor').onChange(() => {
-  material.color.set(parameters.materialColor);
-});
 
 //====================== Texture ======================
 const textureLoader = new THREE.TextureLoader();
@@ -188,11 +183,11 @@ window.addEventListener('scroll', () => {
     // console.log('Changed!', currentSection);
 
     gsap.to(sectionMeshes[currentSection].rotation, {
-      duration: 1.5,
+      duration: 1.8,
       ease: 'power2.inOut',
-      x: '+=6',
-      y: '+=3',
-      z: '+=1.5',
+      x: '+=8',
+      y: '+=9',
+      z: '+=1.4',
     });
   }
 });
@@ -211,6 +206,76 @@ window.addEventListener('mousemove', (event) => {
   // console.log(cursor);
 });
 
+//==================== Music =========================
+const audio = new Audio('./music/all-for-you.mp3');
+audio.loop = true;
+audio.volume = 0.4;
+
+const playButton = document.querySelector('.play-button');
+const playButtonImage = playButton.querySelector('img');
+let isPlaying = false;
+
+const animatePlayButtonImage = () => {
+  if (isPlaying) {
+    gsap.to(playButtonImage, {
+      scale: 1.4,
+      duration: 0.5,
+      ease: 'power1.inOut',
+      yoyo: true,
+      repeat: -1,
+    });
+
+    gsap.to(playButtonImage, {
+      rotation: 360,
+      duration: 5,
+      ease: 'linear',
+      repeat: -1,
+    });
+  } else {
+    // Stop and remove all ongoing GSAP animations
+    gsap.killTweensOf(playButtonImage);
+
+    gsap.to(playButtonImage, {
+      scale: 1,
+      duration: 0.5,
+      ease: 'power1.inOut',
+      rotation: 0,
+    });
+  }
+};
+
+playButton.addEventListener('click', () => {
+  if (isPlaying) {
+    audio.pause();
+
+    // Change the icon to play
+    playButtonImage.src = './textures/social/music.png';
+  } else {
+    audio.play();
+
+    // Change the icon to pause
+    playButtonImage.src = './textures/social/pause.png';
+  }
+  isPlaying = !isPlaying;
+
+  gsap.to(playButton, {
+    scale: 1.2,
+    duration: 0.3,
+    yoyo: true,
+    repeat: 1,
+    ease: 'power1.inOut',
+  });
+
+  gsap.to(playButton, {
+    rotation: isPlaying ? 360 : -360,
+    duration: 0.5,
+    ease: 'power1.inOut',
+  });
+
+  // Trigger the image animation
+  animatePlayButtonImage();
+});
+
 //==================== Animate ========================
 const clock = new THREE.Clock();
 let previousTime = 0;
@@ -226,9 +291,9 @@ const tick = () => {
   const parallaxX = cursor.x * 0.5;
   const parallaxY = -cursor.y * 0.5;
   cameraGroup.position.x +=
-    (parallaxX - cameraGroup.position.x) * 5 * deltaTime;
+    (parallaxX - cameraGroup.position.x) * 8 * deltaTime;
   cameraGroup.position.y +=
-    (parallaxY - cameraGroup.position.y) * 5 * deltaTime;
+    (parallaxY - cameraGroup.position.y) * 8 * deltaTime;
 
   //======== Animate Meshes
   for (const mesh of sectionMeshes) {
@@ -244,12 +309,13 @@ const tick = () => {
       Math.sin(elapsedTime + i3) * 0.001; // Y
 
     particleGeometry.attributes.position.array[i3] +=
-      Math.cos(elapsedTime + i3) * 0.002; // X
+      Math.cos(elapsedTime + i3) * 0.003; // X
   }
   particleGeometry.attributes.position.needsUpdate = true;
 
   //======== Animating particle color
-  particlesMaterial.color.setHSL(Math.sin(elapsedTime * 0.5), 0.3, 0.5);
+  const hue = Math.sin(elapsedTime * 0.3) % 1; // Cycles hue between 0 and 1
+  particlesMaterial.color.setHSL(hue, 0.5, 0.5);
 
   adjustObjectsAndParticles(width);
 
