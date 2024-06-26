@@ -21,6 +21,8 @@ const objectDistance = 4;
 
 const material = new THREE.MeshStandardMaterial({
   color: parameters.materialColor,
+  roughness: 0.5,
+  metalness: 0.1,
 });
 
 const homeMesh = new THREE.Mesh(
@@ -85,12 +87,16 @@ const particleMesh = new THREE.Points(particleGeometry, particlesMaterial);
 scene.add(particleMesh);
 
 //====================== Lights =======================
-const directionalLight = new THREE.DirectionalLight(0x4e00ff, 5);
-directionalLight.position.set(1, 1, 0);
+const directionalLight = new THREE.DirectionalLight(0x4e00ff, 4);
+directionalLight.position.set(-2, 10, -1);
 scene.add(directionalLight);
 
-const ambientLight = new THREE.AmbientLight(0x00ffff, 0.2);
+const ambientLight = new THREE.AmbientLight(0x00fffc, 0.15);
 scene.add(ambientLight);
+
+const pointLight = new THREE.PointLight(0xff9000, 4.5,20);
+pointLight.position.set(1, -4.5, 2);
+scene.add(pointLight);
 
 //====================== Camera =======================
 let width = window.innerWidth;
@@ -291,9 +297,9 @@ const tick = () => {
   const parallaxX = cursor.x * 0.5;
   const parallaxY = -cursor.y * 0.5;
   cameraGroup.position.x +=
-    (parallaxX - cameraGroup.position.x) * 8 * deltaTime;
+    (parallaxX - cameraGroup.position.x) * 3 * deltaTime;
   cameraGroup.position.y +=
-    (parallaxY - cameraGroup.position.y) * 8 * deltaTime;
+    (parallaxY - cameraGroup.position.y) * 5 * deltaTime;
 
   //======== Animate Meshes
   for (const mesh of sectionMeshes) {
@@ -309,7 +315,7 @@ const tick = () => {
       Math.sin(elapsedTime + i3) * 0.001; // Y
 
     particleGeometry.attributes.position.array[i3] +=
-      Math.cos(elapsedTime + i3) * 0.003; // X
+      Math.cos(elapsedTime + i3) * 0.001; // X
   }
   particleGeometry.attributes.position.needsUpdate = true;
 
