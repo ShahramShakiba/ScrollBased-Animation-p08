@@ -285,3 +285,101 @@ h2 {
   width: 28px;
   height: 28px;
 }
+
+/*================= Responsive - 1200px =============*/
+@media (max-width: 1200px) {
+  .home,
+  .about-me,
+  .contact-me {
+    width: 70%;
+  }
+
+  .home img {
+    width: 80px;
+    height: 80px;
+  }
+
+  h1,
+  h2 {
+    font-size: 5vmin;
+  }
+}
+
+/*================= Responsive - 768px =============*/
+@media (max-width: 768px) {
+  .section {
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem;
+  }
+
+  .home,
+  .about-me,
+  .contact-me {
+    width: 80%;
+    margin-bottom: 3rem;
+  }
+
+  .about-me {
+    margin-bottom: 12rem;
+  }
+
+  .home img {
+    width: 70px;
+    height: 70px;
+  }
+
+  h1,
+  h2 {
+    font-size: 5vmin;
+    margin-bottom: 1rem;
+  }
+
+  .home .header {
+    flex-direction: column;
+  }
+
+  .home .header p {
+    margin-top: 0.5rem;
+  }
+
+  .home .content {
+    text-align: left;
+  }
+
+  .cta {
+    font-size: 1rem;
+    padding: 0.5rem 1rem;
+    margin-top: 2rem;
+    display: inline-block; /* Ensure it behaves like a button */
+  }
+
+  .play-button {
+    bottom: 10px;
+    left: 10px;
+  }
+}
+
+/*================= Responsive - 480px =============*/
+@media (max-width: 480px) {
+  .home,
+  .about-me,
+  .contact-me {
+    width: 100%;
+  }
+
+  .home img {
+    width: 60px;
+    height: 60px;
+  }
+
+  h1,
+  h2 {
+    font-size: 3.5vmin;
+  }
+
+  .cta {
+    font-size: 0.9rem;
+    padding: 0.4rem 0.8rem;
+  }
+}
