@@ -373,6 +373,10 @@ h2 {
     height: 60px;
   }
 
+  .about-me {
+    margin-bottom: 4rem;
+  }
+
   h1,
   h2 {
     font-size: 3.5vmin;

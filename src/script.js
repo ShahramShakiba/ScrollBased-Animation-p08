@@ -26,7 +26,6 @@ const objectDistance = 4;
 
 const material = new THREE.MeshStandardMaterial({
   color: parameters.materialColor,
-  
 });
 
 const homeMesh = new THREE.Mesh(
@@ -58,7 +57,7 @@ scene.add(homeMesh, aboutMeMesh, contactMesh);
 const sectionMeshes = [homeMesh, aboutMeMesh, contactMesh];
 
 //===================== Particles =====================
-const count = 1;
+const count = 70;
 const positions = new Float32Array(count * 3);
 
 for (let i = 0; i < count; i++) {
@@ -129,7 +128,50 @@ window.addEventListener('resize', () => {
 
   renderer.setSize(width, height);
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+  adjustObjectsAndParticles(width);
 });
+
+//==================== Adjust Objects Based on Width ====================
+const adjustObjectsAndParticles = (width) => {
+  if (width <= 480) {
+    homeMesh.scale.set(0.5, 0.5, 0.5);
+    aboutMeMesh.scale.set(0.5, 0.5, 0.5);
+    contactMesh.scale.set(0.5, 0.5, 0.5);
+    particlesMaterial.size = 1.0;
+
+    homeMesh.position.y = objectDistance * 0.2;
+    aboutMeMesh.position.y = -objectDistance * 0.85;
+    contactMesh.position.y = -objectDistance * 2.3;
+
+    homeMesh.position.x = 0.4;
+    aboutMeMesh.position.x = 0.3;
+    contactMesh.position.x = 0.52;
+  } else if (width <= 768) {
+    homeMesh.scale.set(0.75, 0.75, 0.75);
+    aboutMeMesh.scale.set(0.75, 0.75, 0.75);
+    contactMesh.scale.set(0.75, 0.75, 0.75);
+    particlesMaterial.size = 1.2;
+
+    homeMesh.position.y = objectDistance * 0.2;
+    aboutMeMesh.position.y = -objectDistance * 0.85;
+    contactMesh.position.y = -objectDistance * 2.2;
+
+    homeMesh.position.x = 1;
+    aboutMeMesh.position.x = 0;
+    contactMesh.position.x = 0.7;
+  } else {
+    // Adjust for large screens
+    homeMesh.scale.set(1, 1, 1);
+    aboutMeMesh.scale.set(1, 1, 1);
+    contactMesh.scale.set(1, 1, 1);
+    particlesMaterial.size = 1.5;
+
+    homeMesh.position.x = 2;
+    aboutMeMesh.position.x = -2;
+    contactMesh.position.x = 2;
+  }
+};
 
 //==================== Scroll =========================
 let scrollY = window.scrollY;
@@ -208,6 +250,8 @@ const tick = () => {
 
   //======== Animating particle color
   particlesMaterial.color.setHSL(Math.sin(elapsedTime * 0.5), 0.3, 0.5);
+
+  adjustObjectsAndParticles(width);
 
   renderer.render(scene, camera);
   window.requestAnimationFrame(tick);
