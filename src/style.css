@@ -34,9 +34,10 @@ section:nth-child(odd) {
 
 h1,
 h2 {
+  font-family: 'Audiowide', sans-serif;
+  font-size: 6vmin;
   width: fit-content;
   flex-direction: column;
-  font-size: 9vmin;
   color: #ffeded; /* Fallback color */
   padding-bottom: 1rem;
   cursor: pointer;
@@ -45,11 +46,21 @@ h2 {
   transition: background-position 0.6s ease-in-out; /* Smooth transition */
 }
 
+.home p,
+.about-me p,
+.contact-me p {
+  color: #d8d8d8;
+  font-size: 1.3rem;
+  line-height: 2.1rem;
+  padding-bottom: 1rem;
+  font-family: 'Playwrite DE Grund', sans-serif;
+}
+
 /*================ HERO ===============*/
 .home {
   width: 60%;
   padding: 2rem 1rem;
-  margin-top: 4rem;
+  margin-top: 3.5rem;
 }
 
 .home img {
@@ -99,16 +110,14 @@ h2 {
 }
 
 .home .content h1 {
-  font-family: 'Audiowide', sans-serif;
-  font-size: 6vmin;
   background: linear-gradient(
     90deg,
-    #e6e6fa,
-    #d8bfd8,
-    #dda0dd,
-    #ba55d3,
-    #9932cc,
-    #9400d3
+    #5b86e5,
+    #36d1dc,
+    #8e44ad,
+    #9b59b6,
+    #8e44ad,
+    #5b86e5
   );
   background-size: 200%; /* To ensure the animation effect */
   background-clip: text;
@@ -120,29 +129,30 @@ h2 {
 }
 
 .home .content p span {
-  color: #d499d4;
+  color: #36d1dc;
   font-weight: bold;
   transition: color 0.3s ease-in-out;
 }
 
 .home .content p span:hover {
-  color: #12c2e9;
+  color: #5d83c9;
 }
 
 /*___ CTA ___*/
 .cta {
+  font-family: 'Playwrite DE Grund', sans-serif;
   cursor: pointer;
-  padding: 0.8rem 1.2rem;
+  padding: 0.7rem 1.1rem;
   font-weight: 700;
-  font-size: 1.4rem;
+  font-size: 1.2rem;
   border-radius: 1% 13%;
   background: transparent;
-  border: none;
-  color: #ebb769; 
+  border: 2px solid #5b86e5;
+  color: #5b86e5;
   position: relative;
   overflow: hidden;
-  transition: color 0.4s;
-  margin-top: 2rem;
+  transition: color 0.4s, border-color 0.4s;
+  margin-top: 3.5rem;
   display: inline-block; /* Ensure it behaves like a button */
   text-decoration: none;
 }
@@ -154,11 +164,7 @@ h2 {
   left: 0;
   bottom: 0;
   right: 0;
-  background: linear-gradient(
-    90deg,
-    #ba55d3,
-    #9932cc
-  ); 
+  background: linear-gradient(90deg, #5b86e5, #8e44ad);
   z-index: 1;
   transform: translateX(-100%);
   transition: transform 0.5s ease;
@@ -169,7 +175,8 @@ h2 {
 }
 
 .cta:hover {
-  color: #fff;
+  color: #ffffff;
+  border-color: #5b86e5;
 }
 
 .cta span {
@@ -178,42 +185,31 @@ h2 {
 }
 
 /*=============== About Me ===============*/
-.center {
-  width: 40%;
-  padding: 2rem;
-  margin-top: 10rem;
+.about-me {
+  width: 50%;
+  padding: 1rem;
+  margin-top: 9rem;
 }
 
-.center h2 {
-  /* background: linear-gradient(90deg, #dda0dd, #9400d3, #0000ff, #00ffff); */
-  /* 
-  background: linear-gradient(
-    90deg,
-    #dda0dd,
-    #9400d3,
-    #0000ff,
-    #00ffff,
-    #008080
-  ); */
-
-  /* background: linear-gradient(90deg, #4169e1, #1e90ff, #87ceeb, #00bfff, #87cefa); */
+.about-me h2 {
   background: linear-gradient(90deg, #43cea2, #185a9d, #f5af19, #f12711);
   background-size: 200%;
   background-clip: text;
   -webkit-background-clip: text;
 }
 
-.center h2:hover {
+.about-me h2:hover {
   background-position: 100% 0;
 }
 
-.bottom {
-  width: 40%;
-  padding: 2rem;
-  margin-top: 10rem;
+/*================ Contact Me ==============*/
+.contact-me {
+  width: 50%;
+  padding: 1rem;
+  margin-top: 9rem;
 }
 
-.bottom h2 {
+.contact-me h2 {
   background: linear-gradient(90deg, #ff6a00, #ee0979, #ff56ff, #00ffff);
   background-size: 200%;
   background-clip: text;
@@ -221,14 +217,14 @@ h2 {
   cursor: default;
 }
 
-.bottom h2:hover {
+.contact-me h2:hover {
   background-position: 100% 0;
 }
 
 .contact-links {
   display: flex;
   margin-top: 1.5rem;
-  gap: 1.5rem;
+  gap: 2rem;
 }
 
 .contact-link img {
@@ -241,14 +237,19 @@ h2 {
   transform: scale(1.2);
 }
 
-.home p,
-.center p,
-.bottom p {
-  color: #d8d8d8;
-  font-size: 1.3rem;
-  line-height: 2.1rem;
-  padding-bottom: 1rem;
-  font-family: 'Playwrite DE Grund', sans-serif;
+#contact .cta {
+  font-size: 1rem;
+  padding: 0.55rem 1.2rem;
+  color: #f5af19;
+  border-color: #f5af19;
+}
+
+#contact .cta::before {
+  background: linear-gradient(90deg, #f5af19, #f12711);
+}
+
+#contact .cta:hover {
+  color: black;
 }
 
 /*============ Music-Button ============*/

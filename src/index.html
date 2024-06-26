@@ -3,6 +3,10 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="author" content="Shahram Shakiba" />
+    <meta
+      name="description"
+      content="I am a 3D frontend developer specializing in creating captivating and interactive web experiences. With expertise in Three.js, GSAP animations and modern web technologies like React.js and Next.js, I bring cutting-edge 3D graphics to life on the web."
+    />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" type="icon/png" href="logo.png" />
     <link rel="stylesheet" href="./style.css" />
@@ -12,7 +16,8 @@
   <body>
     <canvas class="webgl"></canvas>
 
-    <section class="section">
+    <!--------------- Home ---------------->
+    <section id='home' class="section">
       <div class="home">
         <div class="header">
           <img src="./textures/social/shahram.jpg" alt="" />
@@ -38,8 +43,9 @@
       </div>
     </section>
 
+    <!--------------- About Me ---------------->
     <section class="section">
-      <div class="center">
+      <div class="about-me">
         <h2>
           <a href="https://github.com/ShahramShakiba" target="_blank"
             >About Me</a
@@ -48,6 +54,7 @@
         <p>
           I place a high value on clear and impactful communication while
           leveraging my robust technical expertise. <br />
+          <br />
           I am dedicated to cultivating resilient connections with both my team
           members and clients, demonstrating a steadfast commitment to
           collaboration and joint efforts.
@@ -55,12 +62,14 @@
       </div>
     </section>
 
+    <!--------------- Contact ---------------->
     <section id="contact" class="section">
-      <div class="bottom">
+      <div class="contact-me">
         <h2>Contact me</h2>
         <p>Shahram Shakiba.</p>
         <p>3D Frontend Developer!</p>
 
+        <!-- LinkedIn -->
         <div class="contact-links">
           <a
             href="https://www.linkedin.com/in/shahramshakiba/"
@@ -70,6 +79,7 @@
             <img src="./textures/social/linkedin.png" alt="LinkedIn" />
           </a>
 
+          <!-- GitHub -->
           <a
             href="https://github.com/ShahramShakiba"
             target="_blank"
@@ -78,6 +88,7 @@
             <img src="./textures/social/github.png" alt="GitHub" />
           </a>
 
+          <!-- WhatsApp -->
           <a
             href="https://wa.me/message/LM2IMM3ABZ7ZM1"
             target="_blank"
@@ -86,9 +97,12 @@
             <img src="./textures/social/whatsapp.png" alt="WhatsApp" />
           </a>
         </div>
+
+        <a href="#home" class="cta"><span>Home!</span></a>
       </div>
     </section>
 
+    <!--------------- Music -------------->
     <button class="play-button">
       <img src="./textures/social/music.png" alt="" />
     </button>
