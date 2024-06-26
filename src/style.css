@@ -209,12 +209,17 @@ h2 {
   margin-top: 9rem;
 }
 
+.contact-me p {
+  line-height: 1.2rem;
+}
+
 .contact-me h2 {
   background: linear-gradient(90deg, #ff6a00, #ee0979, #ff56ff, #00ffff);
   background-size: 200%;
   background-clip: text;
   -webkit-background-clip: text;
   cursor: default;
+  margin-bottom: 1rem;
 }
 
 .contact-me h2:hover {
