@@ -132,51 +132,6 @@ window.addEventListener('resize', () => {
   adjustObjectsAndParticles(width);
 });
 
-//==================== Adjust Objects Based on Width ====================
-const adjustObjectsAndParticles = (width) => {
-  if (width <= 480) {
-    homeMesh.scale.set(0.5, 0.5, 0.5);
-    aboutMeMesh.scale.set(0.5, 0.5, 0.5);
-    contactMesh.scale.set(0.5, 0.5, 0.5);
-    particlesMaterial.size = 1.0;
-
-    homeMesh.position.y = objectDistance * 0.2;
-    aboutMeMesh.position.y = -objectDistance * 0.85;
-    contactMesh.position.y = -objectDistance * 2.3;
-
-    homeMesh.position.x = 0.4;
-    aboutMeMesh.position.x = 0.3;
-    contactMesh.position.x = 0.52;
-  } else if (width <= 768) {
-    homeMesh.scale.set(0.75, 0.75, 0.75);
-    aboutMeMesh.scale.set(0.75, 0.75, 0.75);
-    contactMesh.scale.set(0.75, 0.75, 0.75);
-    particlesMaterial.size = 1.2;
-
-    homeMesh.position.y = objectDistance * 0.2;
-    aboutMeMesh.position.y = -objectDistance * 0.85;
-    contactMesh.position.y = -objectDistance * 2.2;
-
-    homeMesh.position.x = 1;
-    aboutMeMesh.position.x = 0;
-    contactMesh.position.x = 0.7;
-  } else {
-    // Adjust for large screens
-    homeMesh.scale.set(1, 1, 1);
-    aboutMeMesh.scale.set(1, 1, 1);
-    contactMesh.scale.set(1, 1, 1);
-    particlesMaterial.size = 1.5;
-
-    homeMesh.position.y = objectDistance * 0.2;
-    aboutMeMesh.position.y = -objectDistance * 0.88;
-    contactMesh.position.y = -objectDistance * 2;
-
-    homeMesh.position.x = 1.85;
-    aboutMeMesh.position.x = -1.7;
-    contactMesh.position.x = 1.2;
-  }
-};
-
 //==================== Scroll =========================
 let scrollY = window.scrollY;
 let currentSection = 0;
@@ -285,14 +240,61 @@ playButton.addEventListener('click', () => {
   animatePlayButtonImage();
 });
 
+//==================== Adjust Objects Based on Width ====================
+const adjustObjectsAndParticles = (width) => {
+  if (width <= 480) {
+    homeMesh.scale.set(0.62, 0.62, 0.62);
+    aboutMeMesh.scale.set(0.62, 0.62, 0.62);
+    contactMesh.scale.set(0.68, 0.68, 0.68);
+
+    homeMesh.position.y = objectDistance * 0.35;
+    aboutMeMesh.position.y = -objectDistance * 0.85;
+    contactMesh.position.y = -objectDistance * 2.3;
+
+    homeMesh.position.x = 0.8;
+    aboutMeMesh.position.x = 0.3;
+    contactMesh.position.x = 0.52;
+
+  } else if (width <= 768) {
+    homeMesh.scale.set(0.75, 0.75, 0.75);
+    aboutMeMesh.scale.set(0.75, 0.75, 0.75);
+    contactMesh.scale.set(0.75, 0.75, 0.75);
+
+    homeMesh.position.y = objectDistance * 0.2;
+    aboutMeMesh.position.y = -objectDistance * 0.85;
+    contactMesh.position.y = -objectDistance * 2.2;
+
+    homeMesh.position.x = 1;
+    aboutMeMesh.position.x = 0;
+    contactMesh.position.x = 0.7;
+
+    particlesMaterial.size = 1.2;
+  } else {
+    // Adjust for large screens
+    homeMesh.scale.set(1, 1, 1);
+    aboutMeMesh.scale.set(1, 1, 1);
+    contactMesh.scale.set(1, 1, 1);
+
+    homeMesh.position.y = objectDistance * 0.2;
+    aboutMeMesh.position.y = -objectDistance * 1.2;
+    contactMesh.position.y = -objectDistance * 2;
+
+    homeMesh.position.x = 1.85;
+    aboutMeMesh.position.x = -1.7;
+    contactMesh.position.x = 1.2;
+
+    particlesMaterial.size = 1.5;
+  }
+};
+
 //==================== Animate ========================
 const clock = new THREE.Clock();
-let previousTime = 0;
+let prevTime = 0;
 
 const tick = () => {
   const elapsedTime = clock.getElapsedTime();
-  const deltaTime = elapsedTime - previousTime;
-  previousTime = elapsedTime; // update "pre" for the next frame
+  const deltaTime = elapsedTime - prevTime;
+  prevTime = elapsedTime; // update "pre" for the next frame
 
   //======== Animate Camera
   camera.position.y = (-scrollY / height) * objectDistance;

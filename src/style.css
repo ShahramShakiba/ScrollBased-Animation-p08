@@ -310,13 +310,17 @@ h2 {
     margin-bottom: 3rem;
   }
 
+  .home {
+    margin-top: 0.5rem;
+  }
+
   .about-me {
     margin-bottom: 12rem;
   }
 
   .home img {
-    width: 70px;
-    height: 70px;
+    width: 100px;
+    height: 100px;
   }
 
   h1,
@@ -340,12 +344,11 @@ h2 {
   .cta {
     font-size: 1rem;
     padding: 0.5rem 1rem;
-    margin-top: 2rem;
     display: inline-block; /* Ensure it behaves like a button */
   }
 
   .play-button {
-    bottom: 10px;
+    bottom: 20px;
     left: 10px;
   }
 }
@@ -364,30 +367,33 @@ h2 {
   }
 
   .home img {
-    width: 100px;
-    height: 100px;
+    align-self: flex-start;
+    margin-left: 6rem;
   }
 
-  .home .content p {
+  .home p,
+  .about-me p,
+  .contact-me p {
     font-size: 1.1rem;
   }
 
-  .home .cta-container  {
+  .home .cta-container {
     display: flex;
     justify-content: center;
   }
 
-  .home .cta  {
-   margin: 0.2rem;
+  .home .cta {
+    margin: 1.3rem;
   }
 
   .about-me {
     margin-bottom: 4rem;
+    margin-top: 0;
   }
 
   h1,
   h2 {
-    font-size: 5.5vmin;
+    font-size: 8vmin;
   }
 
   h1 {
