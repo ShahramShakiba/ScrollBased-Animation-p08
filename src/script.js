@@ -248,12 +248,12 @@ const adjustObjectsAndParticles = (width) => {
     contactMesh.scale.set(0.68, 0.68, 0.68);
 
     homeMesh.position.y = objectDistance * 0.35;
-    aboutMeMesh.position.y = -objectDistance * 0.85;
-    contactMesh.position.y = -objectDistance * 2.3;
+    aboutMeMesh.position.y = -objectDistance * 0.75;
+    contactMesh.position.y = -objectDistance * 2.4;
 
     homeMesh.position.x = 0.65;
-    aboutMeMesh.position.x = 0.3;
-    contactMesh.position.x = 0.52;
+    aboutMeMesh.position.x = 0.5;
+    contactMesh.position.x = 0;
   } else if (width <= 768) {
     homeMesh.scale.set(0.75, 0.75, 0.75);
     aboutMeMesh.scale.set(0.75, 0.75, 0.75);
@@ -261,11 +261,11 @@ const adjustObjectsAndParticles = (width) => {
 
     homeMesh.position.y = objectDistance * 0.2;
     aboutMeMesh.position.y = -objectDistance * 0.85;
-    contactMesh.position.y = -objectDistance * 2.2;
+    contactMesh.position.y = -objectDistance * 2.5;
 
     homeMesh.position.x = 1;
-    aboutMeMesh.position.x = 0;
-    contactMesh.position.x = 0.7;
+    aboutMeMesh.position.x = 0.5;
+    contactMesh.position.x = 0;
 
     particlesMaterial.size = 1.2;
   } else {
@@ -274,12 +274,12 @@ const adjustObjectsAndParticles = (width) => {
     aboutMeMesh.scale.set(1, 1, 1);
     contactMesh.scale.set(1, 1, 1);
 
-    homeMesh.position.y = objectDistance * 0.2;
+    homeMesh.position.y = objectDistance * 0.15;
     aboutMeMesh.position.y = -objectDistance * 0.85;
     contactMesh.position.y = -objectDistance * 2;
 
-    homeMesh.position.x = 1.85;
-    aboutMeMesh.position.x = -1.9;
+    homeMesh.position.x = 1.55;
+    aboutMeMesh.position.x = -2.3;
     contactMesh.position.x = 1;
 
     particlesMaterial.size = 1.5;
