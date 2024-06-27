@@ -83,15 +83,15 @@ const particleMesh = new THREE.Points(particleGeometry, particlesMaterial);
 scene.add(particleMesh);
 
 //====================== Lights =======================
-const directionalLight = new THREE.DirectionalLight(0x4e00ff, 2.2);
-directionalLight.position.set(-7, 8, -1);
+const directionalLight = new THREE.DirectionalLight(0x4e00ff, 3.2);
+directionalLight.position.set(-7, 8, 5);
 scene.add(directionalLight);
 
 const ambientLight = new THREE.AmbientLight(0x00fffc, 0.15);
 scene.add(ambientLight);
 
-const pointLight = new THREE.PointLight(0xff9000, 7.5, 20);
-pointLight.position.set(1, -4.5, 2);
+const pointLight = new THREE.PointLight(0xff9000, 9.5, 20);
+pointLight.position.set(2, -5, 2.5);
 scene.add(pointLight);
 
 //====================== Camera =======================
@@ -240,7 +240,7 @@ playButton.addEventListener('click', () => {
   animatePlayButtonImage();
 });
 
-//==================== Adjust Objects Based on Width ====================
+//========== Adjust Objects Based on Width =============
 const adjustObjectsAndParticles = (width) => {
   if (width <= 480) {
     homeMesh.scale.set(0.62, 0.62, 0.62);
@@ -251,10 +251,9 @@ const adjustObjectsAndParticles = (width) => {
     aboutMeMesh.position.y = -objectDistance * 0.85;
     contactMesh.position.y = -objectDistance * 2.3;
 
-    homeMesh.position.x = 0.8;
+    homeMesh.position.x = 0.65;
     aboutMeMesh.position.x = 0.3;
     contactMesh.position.x = 0.52;
-
   } else if (width <= 768) {
     homeMesh.scale.set(0.75, 0.75, 0.75);
     aboutMeMesh.scale.set(0.75, 0.75, 0.75);
@@ -276,12 +275,12 @@ const adjustObjectsAndParticles = (width) => {
     contactMesh.scale.set(1, 1, 1);
 
     homeMesh.position.y = objectDistance * 0.2;
-    aboutMeMesh.position.y = -objectDistance * 1.2;
+    aboutMeMesh.position.y = -objectDistance * 0.85;
     contactMesh.position.y = -objectDistance * 2;
 
     homeMesh.position.x = 1.85;
-    aboutMeMesh.position.x = -1.7;
-    contactMesh.position.x = 1.2;
+    aboutMeMesh.position.x = -1.9;
+    contactMesh.position.x = 1;
 
     particlesMaterial.size = 1.5;
   }
@@ -308,7 +307,7 @@ const tick = () => {
 
   //======== Animate Meshes
   for (const mesh of sectionMeshes) {
-    mesh.rotation.x += deltaTime * 0.12;
+    mesh.rotation.x += deltaTime * 0.15;
     mesh.rotation.y += deltaTime * 0.14;
   }
 
