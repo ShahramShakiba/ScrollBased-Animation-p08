@@ -40,10 +40,6 @@ const contactMesh = new THREE.Mesh(
   material
 );
 
-homeMesh.position.y = -objectDistance * 0; // You can remove this line
-aboutMeMesh.position.y = -objectDistance * 1;
-contactMesh.position.y = -objectDistance * 2;
-
 homeMesh.position.x = 2;
 aboutMeMesh.position.x = -2;
 contactMesh.position.x = 2;
@@ -87,14 +83,14 @@ const particleMesh = new THREE.Points(particleGeometry, particlesMaterial);
 scene.add(particleMesh);
 
 //====================== Lights =======================
-const directionalLight = new THREE.DirectionalLight(0x4e00ff, 4);
-directionalLight.position.set(-2, 10, -1);
+const directionalLight = new THREE.DirectionalLight(0x4e00ff, 2.2);
+directionalLight.position.set(-7, 8, -1);
 scene.add(directionalLight);
 
 const ambientLight = new THREE.AmbientLight(0x00fffc, 0.15);
 scene.add(ambientLight);
 
-const pointLight = new THREE.PointLight(0xff9000, 4.5, 20);
+const pointLight = new THREE.PointLight(0xff9000, 7.5, 20);
 pointLight.position.set(1, -4.5, 2);
 scene.add(pointLight);
 
@@ -105,7 +101,7 @@ let height = window.innerHeight;
 const cameraGroup = new THREE.Group();
 scene.add(cameraGroup);
 
-const camera = new THREE.PerspectiveCamera(35, width / height, 0.1, 100);
+const camera = new THREE.PerspectiveCamera(42, width / height, 0.1, 100);
 camera.position.z = 6;
 cameraGroup.add(camera);
 
@@ -113,11 +109,14 @@ cameraGroup.add(camera);
 const renderer = new THREE.WebGLRenderer({
   canvas: canvas,
   antialias: true,
-  alpha: true, // To have backgroundColor instead of WebGL-color
+  alpha: true, // To have backgroundColor instead of WebGL-color ✔️✔️✔️
 });
 
 renderer.setSize(width, height);
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+// renderer.setClearColor('red', 0.5); // Set a clear color & opacity
+// renderer.setClearAlpha(0.5); // Set a clear alpha
 
 //==================== Resize Listener ================
 window.addEventListener('resize', () => {
@@ -168,10 +167,12 @@ const adjustObjectsAndParticles = (width) => {
     contactMesh.scale.set(1, 1, 1);
     particlesMaterial.size = 1.5;
 
-    contactMesh.position.y = -objectDistance * 1.92;
+    homeMesh.position.y = objectDistance * 0.2;
+    aboutMeMesh.position.y = -objectDistance * 0.88;
+    contactMesh.position.y = -objectDistance * 2;
 
     homeMesh.position.x = 1.85;
-    aboutMeMesh.position.x = -2;
+    aboutMeMesh.position.x = -1.7;
     contactMesh.position.x = 1.2;
   }
 };

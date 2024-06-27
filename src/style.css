@@ -49,10 +49,11 @@ h2 {
 .home p,
 .about-me p,
 .contact-me p {
-  color: #d8d8d8;
+  color: #ebebeb;
   font-size: 1.3rem;
-  line-height: 2.1rem;
+  line-height: 2.2rem;
   padding-bottom: 1rem;
+  font-weight: 500;
   font-family: 'Playwrite DE Grund', sans-serif;
 }
 
@@ -147,7 +148,7 @@ h2 {
   font-size: 1.2rem;
   border-radius: 1% 13%;
   background: transparent;
-  border: 2px solid #5b86e5;
+  border: 3px solid #5b86e5;
   color: #5b86e5;
   position: relative;
   overflow: hidden;
@@ -271,8 +272,8 @@ h2 {
 }
 
 .play-button img {
-  width: 28px;
-  height: 28px;
+  width: 38px;
+  height: 38px;
 }
 
 /*================= Responsive - 1200px =============*/
