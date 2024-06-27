@@ -54,7 +54,7 @@ scene.add(homeMesh, aboutMeMesh, contactMesh);
 const sectionMeshes = [homeMesh, aboutMeMesh, contactMesh];
 
 //===================== Particles =====================
-const count = 70;
+const count = 50;
 const positions = new Float32Array(count * 3);
 
 for (let i = 0; i < count; i++) {
@@ -94,7 +94,7 @@ scene.add(directionalLight);
 const ambientLight = new THREE.AmbientLight(0x00fffc, 0.15);
 scene.add(ambientLight);
 
-const pointLight = new THREE.PointLight(0xff9000, 4.5,20);
+const pointLight = new THREE.PointLight(0xff9000, 4.5, 20);
 pointLight.position.set(1, -4.5, 2);
 scene.add(pointLight);
 
@@ -168,9 +168,11 @@ const adjustObjectsAndParticles = (width) => {
     contactMesh.scale.set(1, 1, 1);
     particlesMaterial.size = 1.5;
 
-    homeMesh.position.x = 2;
+    contactMesh.position.y = -objectDistance * 1.92;
+
+    homeMesh.position.x = 1.85;
     aboutMeMesh.position.x = -2;
-    contactMesh.position.x = 2;
+    contactMesh.position.x = 1.2;
   }
 };
 
