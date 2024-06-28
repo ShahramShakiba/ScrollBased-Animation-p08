@@ -136,18 +136,27 @@ window.addEventListener('resize', () => {
 let scrollY = window.scrollY;
 let currentSection = 0;
 
+// Calculate the adjusted duration based on device pixel ratio
+const getAdjustedDuration = (baseDuration) => {
+  const pixelRatio = window.devicePixelRatio || 2;
+  return baseDuration / pixelRatio;
+};
+
 window.addEventListener('scroll', () => {
   scrollY = window.scrollY;
 
-  // Each section is one viewport height. Additional adjustments are required for longer sections.
+  // Each section is 1 viewport height. Additional adjustments are required for longer sections
   const newSection = Math.round(scrollY / height);
 
-  if (newSection != currentSection) {
+  if (newSection !== currentSection) {
     currentSection = newSection;
     // console.log('Changed!', currentSection);
 
+    const baseDuration = 1.8; // Base duration for the animation
+    const adjustedDuration = getAdjustedDuration(baseDuration);
+
     gsap.to(sectionMeshes[currentSection].rotation, {
-      duration: 1.8,
+      duration: adjustedDuration,
       ease: 'power2.inOut',
       x: '+=8',
       y: '+=9',
@@ -244,26 +253,26 @@ playButton.addEventListener('click', () => {
 // Create GSAP animations for a section
 const createSectionAnimations = (section) => {
   gsap.from(`#${section} h1`, {
-    duration: 1.8,
+    duration: 1.7,
     opacity: 0,
     y: -90,
     ease: 'power.out',
   });
   gsap.from(`#${section} h2`, {
-    duration: 1.5,
+    duration: 1.2,
     opacity: 0,
     y: -50,
     ease: 'power.out',
   });
   gsap.from(`#${section} h3`, {
-    duration: 1.5,
+    duration: 1.3,
     opacity: 0,
     x: -90,
     delay: 0.7,
     ease: 'power.out',
   });
   gsap.from(`#${section} p`, {
-    duration: 1.5,
+    duration: 1.3,
     opacity: 0,
     y: 90,
     delay: 0.5,
@@ -271,13 +280,13 @@ const createSectionAnimations = (section) => {
     stagger: 0.4,
   });
   gsap.from(`#${section} img`, {
-    duration: 1.4,
+    duration: 1.3,
     opacity: 0,
     y: -160,
     ease: 'power.in',
   });
   gsap.from(`#${section} .cta`, {
-    duration: 1.8,
+    duration: 1.4,
     opacity: 0,
     x: -150,
     delay: 0.8,
