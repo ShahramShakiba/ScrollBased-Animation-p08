@@ -240,6 +240,74 @@ playButton.addEventListener('click', () => {
   animatePlayButtonImage();
 });
 
+//================= GSAP Animations ==================
+// Create GSAP animations for a section
+const createSectionAnimations = (section) => {
+  gsap.from(`#${section} h1`, {
+    duration: 1.8,
+    opacity: 0,
+    y: -70,
+    ease: 'power.out',
+  });
+  gsap.from(`#${section} h2`, {
+    duration: 1.3,
+    opacity: 0,
+    y: -50,
+    ease: 'power.out',
+  });
+  gsap.from(`#${section} h3`, {
+    duration: 1.3,
+    opacity: 0,
+    x: -70,
+    delay: 0.7,
+    ease: 'power.out',
+  });
+  gsap.from(`#${section} p`, {
+    duration: 1.3,
+    opacity: 0,
+    y: 70,
+    delay: 0.5,
+    ease: 'power.out',
+    stagger: 0.4,
+  });
+  gsap.from(`#${section} img`, {
+    duration: 1.3,
+    opacity: 0,
+    y: -90,
+    ease: 'power.in',
+  });
+  gsap.from(`#${section} .cta`, {
+    duration: 1.3,
+    opacity: 0,
+    x: -90,
+    delay: 0.8,
+    ease: 'power.in',
+  });
+};
+
+// Intersection Observer: activate GSAP when the user gets the current-section
+const sections = document.querySelectorAll('.section');
+const options = {
+  root: null,
+  threshold: 0.15, // Control when the animation starts
+};
+
+const observer = new IntersectionObserver((entries, observer) => {
+  entries.forEach((entry) => {
+    if (entry.isIntersecting) {
+      const sectionId = entry.target.id;
+      createSectionAnimations(sectionId);
+
+      // Stop observing after the animation starts
+      // observer.unobserve(entry.target);
+    }
+  });
+}, options);
+
+sections.forEach((section) => {
+  observer.observe(section);
+});
+
 //========== Adjust Objects Based on Width =============
 const adjustObjectsAndParticles = (width) => {
   if (width <= 480) {

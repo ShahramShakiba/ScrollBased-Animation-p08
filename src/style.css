@@ -84,15 +84,16 @@ h2 {
   margin-bottom: 1rem;
 }
 
-.home .header p {
+.home .header h3 {
   font-family: 'Kaushan Script', sans-serif;
   font-weight: 500;
   font-size: 1.5rem;
   position: relative;
   padding-bottom: 0.8rem;
+  color: #ebebeb;
 }
 
-.home .header p::after {
+.home .header h3::after {
   content: '';
   position: absolute;
   left: 0;
@@ -105,7 +106,7 @@ h2 {
   transition: transform 0.5s ease;
 }
 
-.home .header p:hover::after {
+.home .header h3:hover::after {
   transform: scaleX(0);
   transform-origin: right;
 }
