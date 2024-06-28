@@ -50,7 +50,7 @@ scene.add(homeMesh, aboutMeMesh, contactMesh);
 const sectionMeshes = [homeMesh, aboutMeMesh, contactMesh];
 
 //===================== Particles =====================
-const count = 50;
+const count = 100;
 const positions = new Float32Array(count * 3);
 
 for (let i = 0; i < count; i++) {
@@ -147,7 +147,7 @@ window.addEventListener('scroll', () => {
     // console.log('Changed!', currentSection);
 
     gsap.to(sectionMeshes[currentSection].rotation, {
-      duration: adjustedDuration,
+      duration: 2,
       ease: 'power2.inOut',
       x: '+=8',
       y: '+=9',
@@ -323,6 +323,8 @@ const adjustObjectsAndParticles = (width) => {
     homeMesh.position.x = 0.65;
     aboutMeMesh.position.x = 0.5;
     contactMesh.position.x = 0;
+
+    particlesMaterial.size = 0.5;
   } else if (width <= 768) {
     homeMesh.scale.set(0.75, 0.75, 0.75);
     aboutMeMesh.scale.set(0.75, 0.75, 0.75);
@@ -336,7 +338,7 @@ const adjustObjectsAndParticles = (width) => {
     aboutMeMesh.position.x = 0.5;
     contactMesh.position.x = 0;
 
-    particlesMaterial.size = 1.2;
+    particlesMaterial.size = 0.6;
   } else {
     // Adjust for large screens
     homeMesh.scale.set(1, 1, 1);
@@ -351,7 +353,7 @@ const adjustObjectsAndParticles = (width) => {
     aboutMeMesh.position.x = -2.3;
     contactMesh.position.x = 1;
 
-    particlesMaterial.size = 1.5;
+    particlesMaterial.size = 0.8;
   }
 };
 

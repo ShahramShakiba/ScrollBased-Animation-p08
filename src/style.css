@@ -113,13 +113,12 @@ h2 {
 
 .home .content h1 {
   background: linear-gradient(
-    90deg,
-    #5b86e5,
-    #36d1dc,
-    #8e44ad,
-    #9b59b6,
-    #8e44ad,
-    #5b86e5
+    45deg,
+    #6a11cb,
+    #2575fc,
+    #ffb347,
+    #ffcc33,
+    #6a11cb
   );
   background-size: 200%; /* To ensure the animation effect */
   background-clip: text;
