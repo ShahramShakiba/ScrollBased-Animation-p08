@@ -244,7 +244,7 @@ playButton.addEventListener('click', () => {
 // Create GSAP animations for a section
 const createSectionAnimations = (section) => {
   gsap.from(`#${section} h1`, {
-    duration: 1.7,
+    duration: 1.5,
     opacity: 0,
     y: -90,
     ease: 'power.out',
@@ -256,31 +256,32 @@ const createSectionAnimations = (section) => {
     ease: 'power.out',
   });
   gsap.from(`#${section} h3`, {
-    duration: 1.3,
+    duration: 1,
     opacity: 0,
     x: -90,
     delay: 0.7,
     ease: 'power.out',
   });
   gsap.from(`#${section} p`, {
-    duration: 1.3,
+    duration: 1,
     opacity: 0,
     y: 90,
-    delay: 0.5,
+    delay: 0.3,
     ease: 'power.out',
-    stagger: 0.4,
+    stagger: 0.3,
   });
   gsap.from(`#${section} img`, {
-    duration: 1.3,
+    duration: 1.7,
     opacity: 0,
-    y: -160,
-    ease: 'power.in',
+    delay: 0.1,
+    x: -50,
+    ease: 'ease.out',
   });
   gsap.from(`#${section} .cta`, {
-    duration: 1.4,
+    duration: 1,
     opacity: 0,
     x: -150,
-    delay: 0.8,
+    delay: 0.5,
     ease: 'power.in',
   });
 };
