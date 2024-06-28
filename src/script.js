@@ -136,12 +136,6 @@ window.addEventListener('resize', () => {
 let scrollY = window.scrollY;
 let currentSection = 0;
 
-// Calculate the adjusted duration based on device pixel ratio
-const getAdjustedDuration = (baseDuration) => {
-  const pixelRatio = window.devicePixelRatio || 2;
-  return baseDuration / pixelRatio;
-};
-
 window.addEventListener('scroll', () => {
   scrollY = window.scrollY;
 
@@ -151,9 +145,6 @@ window.addEventListener('scroll', () => {
   if (newSection !== currentSection) {
     currentSection = newSection;
     // console.log('Changed!', currentSection);
-
-    const baseDuration = 1.8; // Base duration for the animation
-    const adjustedDuration = getAdjustedDuration(baseDuration);
 
     gsap.to(sectionMeshes[currentSection].rotation, {
       duration: adjustedDuration,
