@@ -246,40 +246,40 @@ const createSectionAnimations = (section) => {
   gsap.from(`#${section} h1`, {
     duration: 1.8,
     opacity: 0,
-    y: -70,
+    y: -90,
     ease: 'power.out',
   });
   gsap.from(`#${section} h2`, {
-    duration: 1.3,
+    duration: 1.5,
     opacity: 0,
     y: -50,
     ease: 'power.out',
   });
   gsap.from(`#${section} h3`, {
-    duration: 1.3,
+    duration: 1.5,
     opacity: 0,
-    x: -70,
+    x: -90,
     delay: 0.7,
     ease: 'power.out',
   });
   gsap.from(`#${section} p`, {
-    duration: 1.3,
+    duration: 1.5,
     opacity: 0,
-    y: 70,
+    y: 90,
     delay: 0.5,
     ease: 'power.out',
     stagger: 0.4,
   });
   gsap.from(`#${section} img`, {
-    duration: 1.3,
+    duration: 1.4,
     opacity: 0,
-    y: -90,
+    y: -160,
     ease: 'power.in',
   });
   gsap.from(`#${section} .cta`, {
-    duration: 1.3,
+    duration: 1.8,
     opacity: 0,
-    x: -90,
+    x: -150,
     delay: 0.8,
     ease: 'power.in',
   });
