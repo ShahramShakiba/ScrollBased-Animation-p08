@@ -142,10 +142,9 @@ window.addEventListener('scroll', () => {
 
     gsap.to(objectsContainer[currentSection].rotation, {
       duration: 2,
-      ease: 'power2.inOut',
-      x: '+=8',
-      y: '+=9',
-      z: '+=1.4',
+      x: '+=3',
+      y: '+=4',
+      z: '+=1',
     });
   }
 });

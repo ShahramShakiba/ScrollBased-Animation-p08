@@ -38,12 +38,12 @@ h2 {
   font-size: 6vmin;
   width: fit-content;
   flex-direction: column;
-  color: #ffeded; /* Fallback color */
+  color: #ffeded; 
   padding-bottom: 1rem;
   cursor: pointer;
   color: transparent;
   -webkit-text-fill-color: transparent; /* Ensure the gradient shows in text */
-  transition: background-position 0.6s ease-in-out; /* Smooth transition */
+  transition: background-position 0.6s ease-in-out; 
 }
 
 h3 {
@@ -53,7 +53,7 @@ h3 {
 .home p,
 .about-me p,
 .contact-me p {
-  color: #ebebeb;
+  color: #dadada;
   font-size: 1.3rem;
   line-height: 2.2rem;
   padding-bottom: 1rem;
@@ -145,9 +145,9 @@ h3 {
 }
 
 .home .content p span {
-  color: #36d1dc;
-  font-weight: 700;
-  font-size: 1.4rem;
+  color: #ffb347;
+  font-weight: bold;
+  font-size: 1.35rem;
   transition: color 0.3s ease-in-out;
 }
 
