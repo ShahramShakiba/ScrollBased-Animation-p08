@@ -83,15 +83,15 @@ const particleMesh = new THREE.Points(particleGeometry, particlesMaterial);
 scene.add(particleMesh);
 
 //====================== Lights =======================
-const directionalLight = new THREE.DirectionalLight(0x4e00ff, 3.2);
+const directionalLight = new THREE.DirectionalLight(0x6524fc, 3);
 directionalLight.position.set(-7, 8, 5);
 scene.add(directionalLight);
 
 const ambientLight = new THREE.AmbientLight(0x00fffc, 0.15);
 scene.add(ambientLight);
 
-const pointLight = new THREE.PointLight(0xff9000, 9.5, 20);
-pointLight.position.set(2, -5, 2.5);
+const pointLight = new THREE.PointLight(0xff9000, 11.5, 20);
+pointLight.position.set(2, -4.8, 2.5);
 scene.add(pointLight);
 
 //====================== Camera =======================
@@ -243,47 +243,70 @@ playButton.addEventListener('click', () => {
 //================= GSAP Animations ==================
 // Create GSAP animations for a section
 const createSectionAnimations = (section) => {
-  gsap.from(`#${section} h1`, {
-    duration: 1.5,
-    opacity: 0,
-    y: -90,
-    ease: 'power.out',
-  });
-  gsap.from(`#${section} h2`, {
-    duration: 1.2,
-    opacity: 0,
-    y: -50,
-    ease: 'power.out',
-  });
-  gsap.from(`#${section} h3`, {
-    duration: 1,
-    opacity: 0,
-    x: -90,
-    delay: 0.7,
-    ease: 'power.out',
-  });
-  gsap.from(`#${section} p`, {
-    duration: 1,
-    opacity: 0,
-    y: 90,
-    delay: 0.3,
-    ease: 'power.out',
-    stagger: 0.3,
-  });
-  gsap.from(`#${section} img`, {
-    duration: 1.7,
-    opacity: 0,
-    delay: 0.1,
-    x: -50,
-    ease: 'ease.out',
-  });
-  gsap.from(`#${section} .cta`, {
-    duration: 1,
-    opacity: 0,
-    x: -150,
-    delay: 0.5,
-    ease: 'power.in',
-  });
+  const sectionElement = document.getElementById(section);
+
+  if (!sectionElement) return;
+
+  const h1 = sectionElement.querySelector('h1');
+  const h2 = sectionElement.querySelector('h2');
+  const h3 = sectionElement.querySelector('h3');
+  const p = sectionElement.querySelector('p');
+  const img = sectionElement.querySelector('.socials');
+  const cta = sectionElement.querySelector('.cta');
+
+  if (h1) {
+    gsap.from(h1, {
+      duration: 1.5,
+      opacity: 0,
+      y: -90,
+      ease: 'power.out',
+    });
+  }
+  if (h2) {
+    gsap.from(h2, {
+      duration: 1.2,
+      opacity: 0,
+      y: -50,
+      ease: 'power.out',
+    });
+  }
+  if (h3) {
+    gsap.from(h3, {
+      duration: 1,
+      opacity: 0,
+      x: -90,
+      delay: 0.7,
+      ease: 'power.out',
+    });
+  }
+  if (p) {
+    gsap.from(p, {
+      duration: 1,
+      opacity: 0,
+      y: 90,
+      delay: 0.3,
+      ease: 'power.out',
+      stagger: 0.3,
+    });
+  }
+  if (img) {
+    gsap.from(img, {
+      duration: 1.7,
+      opacity: 0,
+      delay: 0.1,
+      x: -50,
+      ease: 'ease.out',
+    });
+  }
+  if (cta) {
+    gsap.from(cta, {
+      duration: 1,
+      opacity: 0,
+      x: -150,
+      delay: 0.5,
+      ease: 'power.in',
+    });
+  }
 };
 
 // Intersection Observer: activate GSAP when the user gets the current-section

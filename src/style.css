@@ -131,7 +131,8 @@ h2 {
 
 .home .content p span {
   color: #36d1dc;
-  font-weight: bold;
+  font-weight: 700;
+  font-size: 1.4rem;
   transition: color 0.3s ease-in-out;
 }
 
@@ -277,6 +278,11 @@ h2 {
 .play-button img {
   width: 38px;
   height: 38px;
+  transition: all 0.25s ease-out;
+}
+
+.play-button img:hover {
+  scale: 1.2;
 }
 
 /*================= Responsive - 1200px =============*/
