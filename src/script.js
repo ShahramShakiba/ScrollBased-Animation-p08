@@ -389,7 +389,21 @@ const tick = () => {
   const deltaTime = elapsedTime - prevTime;
   prevTime = elapsedTime; // update "pre" for the next frame
 
-  //======== Animate Camera
+  const h3 = document.querySelector('h3');
+
+  //=========== Update the position of the <h1> 
+  const animateCircularMotion = (element, radius, centerX, speed) => {
+    const x = centerX + radius * Math.cos(speed * elapsedTime);
+
+    gsap.to(element, {
+      x: x,
+      duration: 0.1,
+      ease: 'none',
+    });
+  };
+  animateCircularMotion(h3, 20, width / 65, 1);
+
+  //========== Animate Camera
   camera.position.y = (-scrollY / height) * objectDistance;
 
   const parallaxX = cursor.x * 0.5;
@@ -399,13 +413,13 @@ const tick = () => {
   cameraGroup.position.y +=
     (parallaxY - cameraGroup.position.y) * 5 * deltaTime;
 
-  //======== Animate Meshes
+  //========== Animate Meshes
   for (const mesh of sectionMeshes) {
     mesh.rotation.x += deltaTime * 0.15;
     mesh.rotation.y += deltaTime * 0.14;
   }
 
-  //======== Animate Particles
+  //========== Animate Particles
   for (let i = 0; i < count; i++) {
     const i3 = i * 3;
 
@@ -417,7 +431,7 @@ const tick = () => {
   }
   particleGeometry.attributes.position.needsUpdate = true;
 
-  //======== Animating particle color
+  //========= Animating particle color
   const hue = Math.sin(elapsedTime * 0.3) % 1; // Cycles hue between 0 and 1
   particlesMaterial.color.setHSL(hue, 0.5, 0.5);
 

@@ -46,6 +46,10 @@ h2 {
   transition: background-position 0.6s ease-in-out; /* Smooth transition */
 }
 
+h3 {
+  position: absolute;
+}
+
 .home p,
 .about-me p,
 .contact-me p {
