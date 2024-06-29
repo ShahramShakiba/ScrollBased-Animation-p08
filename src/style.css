@@ -104,15 +104,26 @@ h3 {
   bottom: 0;
   width: 100%;
   height: 1px;
-  background: currentColor;
-  transform: scaleX(1);
+  opacity: 0.3;
+  background: linear-gradient(45deg, #8f49da, #4887f5, #8847ce, #eeb667);
+  transform: scaleX(0);
   transform-origin: left;
-  transition: transform 0.5s ease;
+  animation: underlineAnimation 6s linear infinite;
 }
 
-.home .header h3:hover::after {
-  transform: scaleX(0);
-  transform-origin: right;
+@keyframes underlineAnimation {
+  0% {
+    transform: scaleX(0);
+    transform-origin: left;
+  }
+  50% {
+    transform: scaleX(1);
+    transform-origin: left;
+  }
+  100% {
+    transform: scaleX(0);
+    transform-origin: right;
+  }
 }
 
 .home .content h1 {

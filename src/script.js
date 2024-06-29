@@ -1,24 +1,26 @@
 import * as THREE from 'three';
 import gsap from 'gsap';
-import GUI from 'lil-gui';
 
 const canvas = document.querySelector('canvas.webgl');
 const scene = new THREE.Scene();
+
+let width = window.innerWidth;
+let height = window.innerHeight;
+const objectDistance = 4;
+const count = 90;
 
 const parameters = {
   materialColor: '#ffeded',
   particleSize: 1.5,
 };
 
-//====================== Texture ======================
+//======================= Texture =======================
 const textureLoader = new THREE.TextureLoader();
 
 const triangleTexture = textureLoader.load('./textures/triangle.png');
 triangleTexture.colorSpace = THREE.SRGBColorSpace;
 
-//====================== Objects ======================
-const objectDistance = 4;
-
+//======================= Objects =======================
 const material = new THREE.MeshStandardMaterial({
   color: parameters.materialColor,
   roughness: 0.5,
@@ -40,17 +42,12 @@ const contactMesh = new THREE.Mesh(
   material
 );
 
-homeMesh.position.x = 2;
-aboutMeMesh.position.x = -2;
-contactMesh.position.x = 2;
-
 scene.add(homeMesh, aboutMeMesh, contactMesh);
 
-//=== put all meshes in an array to rotate them in tick()
-const sectionMeshes = [homeMesh, aboutMeMesh, contactMesh];
+// put all meshes in an array to rotate them in tick()
+const objectsContainer = [homeMesh, aboutMeMesh, contactMesh];
 
 //===================== Particles =====================
-const count = 100;
 const positions = new Float32Array(count * 3);
 
 for (let i = 0; i < count; i++) {
@@ -59,30 +56,30 @@ for (let i = 0; i < count; i++) {
   positions[i3] = (Math.random() - 0.5) * 10;
   positions[i3 + 1] =
     objectDistance * 0.5 -
-    Math.random() * objectDistance * sectionMeshes.length;
-  positions[i3 + 2] = (Math.random() - 0.5) * 10;
+    Math.random() * objectDistance * objectsContainer.length;
+  positions[i3 + 2] = (Math.random() - 0.5) * 13;
 }
 
-const particleGeometry = new THREE.BufferGeometry();
-particleGeometry.setAttribute(
+const triangleGeometry = new THREE.BufferGeometry();
+triangleGeometry.setAttribute(
   'position',
   new THREE.BufferAttribute(positions, 3)
 );
 
-const particlesMaterial = new THREE.PointsMaterial({
+const triangleMaterial = new THREE.PointsMaterial({
   size: parameters.particleSize,
   sizeAttenuation: true,
   depthWrite: false,
   blending: THREE.AdditiveBlending,
-  // color: parameters.materialColor,
   map: triangleTexture,
+  // color: parameters.materialColor,
   // transparent: true,
 });
 
-const particleMesh = new THREE.Points(particleGeometry, particlesMaterial);
-scene.add(particleMesh);
+const triangle = new THREE.Points(triangleGeometry, triangleMaterial);
+scene.add(triangle);
 
-//====================== Lights =======================
+//====================== Lights ========================
 const directionalLight = new THREE.DirectionalLight(0x6524fc, 3);
 directionalLight.position.set(-7, 8, 5);
 scene.add(directionalLight);
@@ -94,10 +91,7 @@ const pointLight = new THREE.PointLight(0xff9000, 11.5, 20);
 pointLight.position.set(2, -4.8, 2.5);
 scene.add(pointLight);
 
-//====================== Camera =======================
-let width = window.innerWidth;
-let height = window.innerHeight;
-
+//===================== Camera =========================
 const cameraGroup = new THREE.Group();
 scene.add(cameraGroup);
 
@@ -105,11 +99,11 @@ const camera = new THREE.PerspectiveCamera(42, width / height, 0.1, 100);
 camera.position.z = 6;
 cameraGroup.add(camera);
 
-//===================== Renderer ======================
+//==================== Renderer ========================
 const renderer = new THREE.WebGLRenderer({
   canvas: canvas,
   antialias: true,
-  alpha: true, // To have backgroundColor instead of WebGL-color ✔️✔️✔️
+  alpha: true, // To have backgroundColor instead of WebGL-color ✔️
 });
 
 renderer.setSize(width, height);
@@ -118,7 +112,7 @@ renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 // renderer.setClearColor('red', 0.5); // Set a clear color & opacity
 // renderer.setClearAlpha(0.5); // Set a clear alpha
 
-//==================== Resize Listener ================
+//================ Resize Listener ====================
 window.addEventListener('resize', () => {
   width = window.innerWidth;
   height = window.innerHeight;
@@ -132,7 +126,7 @@ window.addEventListener('resize', () => {
   adjustObjectsAndParticles(width);
 });
 
-//==================== Scroll =========================
+//=================== Scroll =========================
 let scrollY = window.scrollY;
 let currentSection = 0;
 
@@ -146,7 +140,7 @@ window.addEventListener('scroll', () => {
     currentSection = newSection;
     // console.log('Changed!', currentSection);
 
-    gsap.to(sectionMeshes[currentSection].rotation, {
+    gsap.to(objectsContainer[currentSection].rotation, {
       duration: 2,
       ease: 'power2.inOut',
       x: '+=8',
@@ -156,7 +150,7 @@ window.addEventListener('scroll', () => {
   }
 });
 
-//==================== Cursor =========================
+//================== Cursor ========================
 const cursor = {
   x: 0,
   y: 0,
@@ -165,12 +159,11 @@ const cursor = {
 window.addEventListener('mousemove', (event) => {
   cursor.x = event.clientX / width - 0.5;
   cursor.y = event.clientY / height - 0.5;
-  // normalize the value (from -0.5 to +0.5)
 
   // console.log(cursor);
 });
 
-//==================== Music =========================
+//================= Music ==========================
 const audio = new Audio('./music/all-for-you.mp3');
 audio.loop = true;
 audio.volume = 0.4;
@@ -240,8 +233,7 @@ playButton.addEventListener('click', () => {
   animatePlayButtonImage();
 });
 
-//================= GSAP Animations ==================
-// Create GSAP animations for a section
+//================== GSAP Animations ===================
 const createSectionAnimations = (section) => {
   const sectionElement = document.getElementById(section);
 
@@ -332,7 +324,7 @@ sections.forEach((section) => {
   observer.observe(section);
 });
 
-//========== Adjust Objects Based on Width =============
+//=========== Adjust Objects Based on Width ===============
 const adjustObjectsAndParticles = (width) => {
   if (width <= 480) {
     homeMesh.scale.set(0.62, 0.62, 0.62);
@@ -347,7 +339,7 @@ const adjustObjectsAndParticles = (width) => {
     aboutMeMesh.position.x = 0.5;
     contactMesh.position.x = 0;
 
-    particlesMaterial.size = 0.5;
+    triangleMaterial.size = 0.7;
   } else if (width <= 768) {
     homeMesh.scale.set(0.75, 0.75, 0.75);
     aboutMeMesh.scale.set(0.75, 0.75, 0.75);
@@ -361,7 +353,7 @@ const adjustObjectsAndParticles = (width) => {
     aboutMeMesh.position.x = 0.5;
     contactMesh.position.x = 0;
 
-    particlesMaterial.size = 0.6;
+    triangleMaterial.size = 0.8;
   } else {
     // Adjust for large screens
     homeMesh.scale.set(1, 1, 1);
@@ -376,22 +368,25 @@ const adjustObjectsAndParticles = (width) => {
     aboutMeMesh.position.x = -2.3;
     contactMesh.position.x = 1;
 
-    particlesMaterial.size = 0.8;
+    triangleMaterial.size = 1;
   }
 };
 
-//==================== Animate ========================
+adjustObjectsAndParticles(width);
+
+//=================== Animate =======================
 const clock = new THREE.Clock();
 let prevTime = 0;
 
 const tick = () => {
+  //=========== 4
   const elapsedTime = clock.getElapsedTime();
   const deltaTime = elapsedTime - prevTime;
   prevTime = elapsedTime; // update "pre" for the next frame
 
   const h3 = document.querySelector('h3');
 
-  //=========== Update the position of the <h1> 
+  //=========== Update the position of the <h3>
   const animateCircularMotion = (element, radius, centerX, speed) => {
     const x = centerX + radius * Math.cos(speed * elapsedTime);
 
@@ -403,9 +398,10 @@ const tick = () => {
   };
   animateCircularMotion(h3, 20, width / 65, 1);
 
-  //========== Animate Camera
+  //========== Move the camera with scroll - 1
   camera.position.y = (-scrollY / height) * objectDistance;
 
+  //========== Parallax - 3
   const parallaxX = cursor.x * 0.5;
   const parallaxY = -cursor.y * 0.5;
   cameraGroup.position.x +=
@@ -413,29 +409,27 @@ const tick = () => {
   cameraGroup.position.y +=
     (parallaxY - cameraGroup.position.y) * 5 * deltaTime;
 
-  //========== Animate Meshes
-  for (const mesh of sectionMeshes) {
+  //========== Animate Meshes - 2
+  for (const mesh of objectsContainer) {
     mesh.rotation.x += deltaTime * 0.15;
     mesh.rotation.y += deltaTime * 0.14;
   }
 
-  //========== Animate Particles
+  //========== Animate Particles - 6
   for (let i = 0; i < count; i++) {
     const i3 = i * 3;
 
-    particleGeometry.attributes.position.array[i3 + 1] +=
+    triangleGeometry.attributes.position.array[i3 + 1] +=
       Math.sin(elapsedTime + i3) * 0.001; // Y
 
-    particleGeometry.attributes.position.array[i3] +=
+    triangleGeometry.attributes.position.array[i3] +=
       Math.cos(elapsedTime + i3) * 0.001; // X
   }
-  particleGeometry.attributes.position.needsUpdate = true;
+  triangleGeometry.attributes.position.needsUpdate = true;
 
-  //========= Animating particle color
+  //========= Animating particle color - 7
   const hue = Math.sin(elapsedTime * 0.3) % 1; // Cycles hue between 0 and 1
-  particlesMaterial.color.setHSL(hue, 0.5, 0.5);
-
-  adjustObjectsAndParticles(width);
+  triangleMaterial.color.setHSL(hue, 0.5, 0.5);
 
   renderer.render(scene, camera);
   window.requestAnimationFrame(tick);
