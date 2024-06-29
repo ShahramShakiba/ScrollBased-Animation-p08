@@ -10,11 +10,6 @@ const objectDistance = 4;
 const trianglesCount = 50;
 const starsCount = 300;
 
-const parameters = {
-  materialColor: '#ffeded',
-  particleSize: 1.5,
-};
-
 //======================= Texture =======================
 const textureLoader = new THREE.TextureLoader();
 
@@ -25,7 +20,7 @@ starTexture.colorSpace = THREE.SRGBColorSpace;
 
 //======================= Objects =======================
 const material = new THREE.MeshStandardMaterial({
-  color: parameters.materialColor,
+  color: '#ffeded',
   roughness: 0.5,
   metalness: 0.1,
 });
@@ -51,35 +46,31 @@ scene.add(homeMesh, aboutMeMesh, contactMesh);
 const objectsContainer = [homeMesh, aboutMeMesh, contactMesh];
 
 //===================== Particles =====================
-const trianglePositions = new Float32Array(trianglesCount * 3);
-const starPositions = new Float32Array(starsCount * 3);
+const createParticlePositions = (count) => {
+  const positions = new Float32Array(count * 3);
 
-for (let i = 0; i < trianglesCount; i++) {
-  const i3 = i * 3;
+  for (let i = 0; i < count; i++) {
+    const i3 = i * 3;
 
-  trianglePositions[i3] = (Math.random() - 0.5) * 10;
-  trianglePositions[i3 + 1] =
-    objectDistance *
-    0.5 *
-    (Math.random() - 0.5) *
-    objectDistance *
-    objectsContainer.length;
-  trianglePositions[i3 + 2] = (Math.random() - 0.5) * 13;
-}
+    positions[i3] = (Math.random() - 0.5) * 10;
 
-for (let i = 0; i < starsCount; i++) {
-  const i3 = i * 3;
+    positions[i3 + 1] =
+      objectDistance *
+      0.5 *
+      (Math.random() - 0.5) *
+      objectDistance *
+      objectsContainer.length;
 
-  starPositions[i3] = (Math.random() - 0.5) * 10;
-  starPositions[i3 + 1] =
-    objectDistance *
-    0.5 *
-    (Math.random() - 0.5) *
-    objectDistance *
-    objectsContainer.length;
-  starPositions[i3 + 2] = (Math.random() - 0.5) * 13;
-}
+    positions[i3 + 2] = (Math.random() - 0.5) * 10;
+  }
 
+  return positions;
+};
+
+const trianglePositions = createParticlePositions(trianglesCount);
+const starPositions = createParticlePositions(starsCount);
+
+//================ Geometry
 const triangleGeometry = new THREE.BufferGeometry();
 triangleGeometry.setAttribute(
   'position',
@@ -92,30 +83,77 @@ starGeometry.setAttribute(
   new THREE.BufferAttribute(starPositions, 3)
 );
 
-const triangleMaterial = new THREE.PointsMaterial({
-  size: parameters.particleSize,
-  sizeAttenuation: true,
-  depthWrite: false,
-  blending: THREE.AdditiveBlending,
-  map: triangleTexture,
-  // color: parameters.materialColor,
-  // transparent: true,
-});
+//================ Material
+const createParticleMaterial = (texture) => {
+  return new THREE.PointsMaterial({
+    sizeAttenuation: true,
+    map: texture,
+    depthWrite: false,
+    blending: THREE.AdditiveBlending,
+  });
+};
 
-const starMaterial = new THREE.PointsMaterial({
-  size: 0.2,
-  sizeAttenuation: true,
-  map: starTexture,
-  transparent: true, // Enable transparency
-  depthWrite: false, // Prevent depth writing for proper blending
-  blending: THREE.AdditiveBlending, // Set blending mode for transparency
-  alphaTest: 0.5,
-});
+const triangleMaterial = createParticleMaterial(triangleTexture);
+const starMaterial = createParticleMaterial(starTexture);
 
+//================ Points
 const triangle = new THREE.Points(triangleGeometry, triangleMaterial);
 const star = new THREE.Points(starGeometry, starMaterial);
 
 scene.add(triangle, star);
+
+//=========== Adjust Objects Based on Width ===============
+const adjustObjectsAndParticles = (width) => {
+  if (width <= 480) {
+    homeMesh.scale.set(0.62, 0.62, 0.62);
+    aboutMeMesh.scale.set(0.62, 0.62, 0.62);
+    contactMesh.scale.set(0.68, 0.68, 0.68);
+
+    homeMesh.position.y = objectDistance * 0.35;
+    aboutMeMesh.position.y = -objectDistance * 0.75;
+    contactMesh.position.y = -objectDistance * 2.4;
+
+    homeMesh.position.x = 0.65;
+    aboutMeMesh.position.x = 0.5;
+    contactMesh.position.x = 0;
+
+    triangleMaterial.size = 0.7;
+    starMaterial.size = 0.2;
+  } else if (width <= 768) {
+    homeMesh.scale.set(0.75, 0.75, 0.75);
+    aboutMeMesh.scale.set(0.75, 0.75, 0.75);
+    contactMesh.scale.set(0.75, 0.75, 0.75);
+
+    homeMesh.position.y = objectDistance * 0.2;
+    aboutMeMesh.position.y = -objectDistance * 0.85;
+    contactMesh.position.y = -objectDistance * 2.5;
+
+    homeMesh.position.x = 1;
+    aboutMeMesh.position.x = 0.5;
+    contactMesh.position.x = 0;
+
+    triangleMaterial.size = 0.8;
+    starMaterial.size = 0.15;
+  } else {
+    // Adjust for large screens
+    homeMesh.scale.set(1, 1, 1);
+    aboutMeMesh.scale.set(1, 1, 1);
+    contactMesh.scale.set(1, 1, 1);
+
+    homeMesh.position.y = objectDistance * 0.15;
+    aboutMeMesh.position.y = -objectDistance * 0.85;
+    contactMesh.position.y = -objectDistance * 2;
+
+    homeMesh.position.x = 1.55;
+    aboutMeMesh.position.x = -2.3;
+    contactMesh.position.x = 1;
+
+    triangleMaterial.size = 1;
+    starMaterial.size = 0.2;
+  }
+};
+
+adjustObjectsAndParticles(width);
 
 //====================== Lights ========================
 const directionalLight = new THREE.DirectionalLight(0x6524fc, 3);
@@ -360,56 +398,6 @@ const observer = new IntersectionObserver((entries, observer) => {
 sections.forEach((section) => {
   observer.observe(section);
 });
-
-//=========== Adjust Objects Based on Width ===============
-const adjustObjectsAndParticles = (width) => {
-  if (width <= 480) {
-    homeMesh.scale.set(0.62, 0.62, 0.62);
-    aboutMeMesh.scale.set(0.62, 0.62, 0.62);
-    contactMesh.scale.set(0.68, 0.68, 0.68);
-
-    homeMesh.position.y = objectDistance * 0.35;
-    aboutMeMesh.position.y = -objectDistance * 0.75;
-    contactMesh.position.y = -objectDistance * 2.4;
-
-    homeMesh.position.x = 0.65;
-    aboutMeMesh.position.x = 0.5;
-    contactMesh.position.x = 0;
-
-    triangleMaterial.size = 0.7;
-  } else if (width <= 768) {
-    homeMesh.scale.set(0.75, 0.75, 0.75);
-    aboutMeMesh.scale.set(0.75, 0.75, 0.75);
-    contactMesh.scale.set(0.75, 0.75, 0.75);
-
-    homeMesh.position.y = objectDistance * 0.2;
-    aboutMeMesh.position.y = -objectDistance * 0.85;
-    contactMesh.position.y = -objectDistance * 2.5;
-
-    homeMesh.position.x = 1;
-    aboutMeMesh.position.x = 0.5;
-    contactMesh.position.x = 0;
-
-    triangleMaterial.size = 0.8;
-  } else {
-    // Adjust for large screens
-    homeMesh.scale.set(1, 1, 1);
-    aboutMeMesh.scale.set(1, 1, 1);
-    contactMesh.scale.set(1, 1, 1);
-
-    homeMesh.position.y = objectDistance * 0.15;
-    aboutMeMesh.position.y = -objectDistance * 0.85;
-    contactMesh.position.y = -objectDistance * 2;
-
-    homeMesh.position.x = 1.55;
-    aboutMeMesh.position.x = -2.3;
-    contactMesh.position.x = 1;
-
-    triangleMaterial.size = 1;
-  }
-};
-
-adjustObjectsAndParticles(width);
 
 //=================== Animate =======================
 const clock = new THREE.Clock();
