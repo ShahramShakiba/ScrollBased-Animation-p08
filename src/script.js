@@ -7,7 +7,8 @@ const scene = new THREE.Scene();
 let width = window.innerWidth;
 let height = window.innerHeight;
 const objectDistance = 4;
-const count = 90;
+const trianglesCount = 50;
+const starsCount = 300;
 
 const parameters = {
   materialColor: '#ffeded',
@@ -19,6 +20,8 @@ const textureLoader = new THREE.TextureLoader();
 
 const triangleTexture = textureLoader.load('./textures/triangle.png');
 triangleTexture.colorSpace = THREE.SRGBColorSpace;
+const starTexture = textureLoader.load('./textures/star.png');
+starTexture.colorSpace = THREE.SRGBColorSpace;
 
 //======================= Objects =======================
 const material = new THREE.MeshStandardMaterial({
@@ -48,22 +51,45 @@ scene.add(homeMesh, aboutMeMesh, contactMesh);
 const objectsContainer = [homeMesh, aboutMeMesh, contactMesh];
 
 //===================== Particles =====================
-const positions = new Float32Array(count * 3);
+const trianglePositions = new Float32Array(trianglesCount * 3);
+const starPositions = new Float32Array(starsCount * 3);
 
-for (let i = 0; i < count; i++) {
+for (let i = 0; i < trianglesCount; i++) {
   const i3 = i * 3;
 
-  positions[i3] = (Math.random() - 0.5) * 10;
-  positions[i3 + 1] =
-    objectDistance * 0.5 -
-    Math.random() * objectDistance * objectsContainer.length;
-  positions[i3 + 2] = (Math.random() - 0.5) * 13;
+  trianglePositions[i3] = (Math.random() - 0.5) * 10;
+  trianglePositions[i3 + 1] =
+    objectDistance *
+    0.5 *
+    (Math.random() - 0.5) *
+    objectDistance *
+    objectsContainer.length;
+  trianglePositions[i3 + 2] = (Math.random() - 0.5) * 13;
+}
+
+for (let i = 0; i < starsCount; i++) {
+  const i3 = i * 3;
+
+  starPositions[i3] = (Math.random() - 0.5) * 10;
+  starPositions[i3 + 1] =
+    objectDistance *
+    0.5 *
+    (Math.random() - 0.5) *
+    objectDistance *
+    objectsContainer.length;
+  starPositions[i3 + 2] = (Math.random() - 0.5) * 13;
 }
 
 const triangleGeometry = new THREE.BufferGeometry();
 triangleGeometry.setAttribute(
   'position',
-  new THREE.BufferAttribute(positions, 3)
+  new THREE.BufferAttribute(trianglePositions, 3)
+);
+
+const starGeometry = new THREE.BufferGeometry();
+starGeometry.setAttribute(
+  'position',
+  new THREE.BufferAttribute(starPositions, 3)
 );
 
 const triangleMaterial = new THREE.PointsMaterial({
@@ -76,8 +102,20 @@ const triangleMaterial = new THREE.PointsMaterial({
   // transparent: true,
 });
 
+const starMaterial = new THREE.PointsMaterial({
+  size: 0.2,
+  sizeAttenuation: true,
+  map: starTexture,
+  transparent: true, // Enable transparency
+  depthWrite: false, // Prevent depth writing for proper blending
+  blending: THREE.AdditiveBlending, // Set blending mode for transparency
+  alphaTest: 0.5,
+});
+
 const triangle = new THREE.Points(triangleGeometry, triangleMaterial);
-scene.add(triangle);
+const star = new THREE.Points(starGeometry, starMaterial);
+
+scene.add(triangle, star);
 
 //====================== Lights ========================
 const directionalLight = new THREE.DirectionalLight(0x6524fc, 3);
@@ -412,19 +450,32 @@ const tick = () => {
   for (const mesh of objectsContainer) {
     mesh.rotation.x += deltaTime * 0.15;
     mesh.rotation.y += deltaTime * 0.14;
+    mesh.rotation.z += deltaTime * 0.14;
   }
 
   //========== Animate Particles - 6
-  for (let i = 0; i < count; i++) {
+  for (let i = 0; i < trianglesCount; i++) {
     const i3 = i * 3;
-
-    triangleGeometry.attributes.position.array[i3 + 1] +=
-      Math.sin(elapsedTime + i3) * 0.001; // Y
 
     triangleGeometry.attributes.position.array[i3] +=
       Math.cos(elapsedTime + i3) * 0.001; // X
+
+    triangleGeometry.attributes.position.array[i3 + 1] +=
+      Math.sin(elapsedTime + i3) * 0.001; // Y
   }
+
+  for (let i = 0; i < starsCount; i++) {
+    const i3 = i * 3;
+
+    starGeometry.attributes.position.array[i3] -=
+      Math.cos(elapsedTime + i3) * Math.random() * 0.0012;
+
+    starGeometry.attributes.position.array[i3 + 1] -=
+      Math.sin(elapsedTime + i3) * Math.random() * 0.0012;
+  }
+
   triangleGeometry.attributes.position.needsUpdate = true;
+  starGeometry.attributes.position.needsUpdate = true;
 
   //========= Animating particle color - 7
   const hue = Math.sin(elapsedTime * 0.3) % 1; // Cycles hue between 0 and 1
@@ -435,13 +486,6 @@ const tick = () => {
 };
 
 tick();
-
-/* 
-* Parallax
-- is the action of seeing one object through different observation points
-
-- This is done naturally by our eyes and it's how we feel the depth of things
-*/
 
 /*                                - creating an "easing" effect -
 * cameraGroup.position.x += (parallaxX - cameraGroup.position.x) * 0.02;
