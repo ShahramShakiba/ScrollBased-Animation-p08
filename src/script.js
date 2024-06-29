@@ -107,11 +107,11 @@ const adjustObjectsAndParticles = (width) => {
   if (width <= 480) {
     homeMesh.scale.set(0.62, 0.62, 0.62);
     aboutMeMesh.scale.set(0.62, 0.62, 0.62);
-    contactMesh.scale.set(0.68, 0.68, 0.68);
+    contactMesh.scale.set(0.85, 0.85, 0.85);
 
     homeMesh.position.y = objectDistance * 0.35;
     aboutMeMesh.position.y = -objectDistance * 0.75;
-    contactMesh.position.y = -objectDistance * 2.4;
+    contactMesh.position.y = -objectDistance * 2.6;
 
     homeMesh.position.x = 0.65;
     aboutMeMesh.position.x = 0.5;
@@ -247,35 +247,6 @@ const playButton = document.querySelector('.play-button');
 const playButtonImage = playButton.querySelector('img');
 let isPlaying = false;
 
-const animatePlayButtonImage = () => {
-  if (isPlaying) {
-    gsap.to(playButtonImage, {
-      scale: 1.4,
-      duration: 0.5,
-      ease: 'power1.inOut',
-      yoyo: true,
-      repeat: -1,
-    });
-
-    gsap.to(playButtonImage, {
-      rotation: 360,
-      duration: 5,
-      ease: 'linear',
-      repeat: -1,
-    });
-  } else {
-    // Stop and remove all ongoing GSAP animations
-    gsap.killTweensOf(playButtonImage);
-
-    gsap.to(playButtonImage, {
-      scale: 1,
-      duration: 0.5,
-      ease: 'power1.inOut',
-      rotation: 0,
-    });
-  }
-};
-
 playButton.addEventListener('click', () => {
   if (isPlaying) {
     audio.pause();
@@ -308,6 +279,35 @@ playButton.addEventListener('click', () => {
   animatePlayButtonImage();
 });
 
+const animatePlayButtonImage = () => {
+  if (isPlaying) {
+    gsap.to(playButtonImage, {
+      scale: 1.4,
+      duration: 0.5,
+      ease: 'power1.inOut',
+      yoyo: true,
+      repeat: -1,
+    });
+
+    gsap.to(playButtonImage, {
+      rotation: 360,
+      duration: 5,
+      ease: 'linear',
+      repeat: -1,
+    });
+  } else {
+    // Stop and remove all ongoing GSAP animations
+    gsap.killTweensOf(playButtonImage);
+
+    gsap.to(playButtonImage, {
+      scale: 1,
+      duration: 0.5,
+      ease: 'power1.inOut',
+      rotation: 0,
+    });
+  }
+};
+
 //================== GSAP Animations ===================
 const createSectionAnimations = (section) => {
   const sectionElement = document.getElementById(section);
@@ -326,7 +326,6 @@ const createSectionAnimations = (section) => {
       duration: 1.5,
       opacity: 0,
       y: -90,
-      ease: 'power.out',
     });
   }
   if (h2) {
@@ -334,16 +333,14 @@ const createSectionAnimations = (section) => {
       duration: 1.2,
       opacity: 0,
       y: -50,
-      ease: 'power.out',
     });
   }
   if (h3) {
     gsap.from(h3, {
-      duration: 1,
+      duration: 2.5,
       opacity: 0,
       x: -90,
       delay: 0.7,
-      ease: 'power.out',
     });
   }
   if (p) {
@@ -352,7 +349,6 @@ const createSectionAnimations = (section) => {
       opacity: 0,
       y: 90,
       delay: 0.3,
-      ease: 'power.out',
       stagger: 0.3,
     });
   }
@@ -362,7 +358,6 @@ const createSectionAnimations = (section) => {
       opacity: 0,
       delay: 0.1,
       x: -50,
-      ease: 'ease.out',
     });
   }
   if (cta) {
@@ -371,7 +366,6 @@ const createSectionAnimations = (section) => {
       opacity: 0,
       x: -150,
       delay: 0.5,
-      ease: 'power.in',
     });
   }
 };
@@ -383,11 +377,10 @@ const options = {
   threshold: 0.15, // Control when the animation starts
 };
 
-const observer = new IntersectionObserver((entries, observer) => {
+const observer = new IntersectionObserver((entries) => {
   entries.forEach((entry) => {
     if (entry.isIntersecting) {
-      const sectionId = entry.target.id;
-      createSectionAnimations(sectionId);
+      createSectionAnimations(entry.target.id);
 
       // Stop observing after the animation starts
       // observer.unobserve(entry.target);
@@ -435,10 +428,10 @@ const tick = () => {
     (parallaxY - cameraGroup.position.y) * 5 * deltaTime;
 
   //========== Animate Meshes - 2
-  for (const mesh of objectsContainer) {
-    mesh.rotation.x += deltaTime * 0.15;
-    mesh.rotation.y += deltaTime * 0.14;
-    mesh.rotation.z += deltaTime * 0.14;
+  for (const obj of objectsContainer) {
+    obj.rotation.x += deltaTime * 0.18;
+    obj.rotation.y += deltaTime * 0.17;
+    obj.rotation.z += deltaTime * 0.17;
   }
 
   //========== Animate Particles - 6
