@@ -111,14 +111,14 @@ const adjustObjectsAndParticles = (width) => {
 
     homeMesh.position.y = objectDistance * 0.35;
     aboutMeMesh.position.y = -objectDistance * 0.75;
-    contactMesh.position.y = -objectDistance * 2.6;
+    contactMesh.position.y = -objectDistance * 2.5;
 
     homeMesh.position.x = 0.65;
     aboutMeMesh.position.x = 0.5;
     contactMesh.position.x = 0;
 
     triangleMaterial.size = 0.7;
-    starMaterial.size = 0.2;
+    starMaterial.size = 0.4;
   } else if (width <= 768) {
     homeMesh.scale.set(0.75, 0.75, 0.75);
     aboutMeMesh.scale.set(0.75, 0.75, 0.75);
@@ -133,7 +133,7 @@ const adjustObjectsAndParticles = (width) => {
     contactMesh.position.x = 0;
 
     triangleMaterial.size = 0.8;
-    starMaterial.size = 0.15;
+    starMaterial.size = 0.3;
   } else {
     // Adjust for large screens
     homeMesh.scale.set(1, 1, 1);
@@ -149,7 +149,7 @@ const adjustObjectsAndParticles = (width) => {
     contactMesh.position.x = 1;
 
     triangleMaterial.size = 1;
-    starMaterial.size = 0.2;
+    starMaterial.size = 0.3;
   }
 };
 
@@ -239,7 +239,7 @@ window.addEventListener('mousemove', (event) => {
 });
 
 //================= Music ==========================
-const audio = new Audio('./music/all-for-you.mp3');
+const audio = new Audio('./music/connect-me.mp3');
 audio.loop = true;
 audio.volume = 0.4;
 
@@ -410,7 +410,7 @@ const tick = () => {
 
     gsap.to(element, {
       x: x,
-      duration: 0.1,
+      duration: 0.5,
       ease: 'none',
     });
   };

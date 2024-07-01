@@ -159,7 +159,7 @@ h3 {
 .cta {
   font-family: 'Playwrite DE Grund', sans-serif;
   cursor: pointer;
-  padding: 0.7rem 1.1rem;
+  padding: 0.3rem 0.5rem;
   font-weight: 700;
   font-size: 1.2rem;
   border-radius: 1% 13%;
@@ -263,7 +263,7 @@ h3 {
 
 #contact .cta {
   font-size: 1rem;
-  padding: 0.55rem 1.2rem;
+  padding: 0.25rem 0.9rem;
   color: #f5af19;
   border-color: #f5af19;
   align-self: flex-start;
@@ -291,8 +291,8 @@ h3 {
 }
 
 .play-button img {
-  width: 38px;
-  height: 38px;
+  width: 33px;
+  height: 33px;
   transition: all 0.25s ease-out;
 }
 
@@ -385,6 +385,11 @@ h3 {
     bottom: 20px;
     left: 10px;
   }
+
+  .play-button img {
+    width:30px;
+    height:30px;
+  }
 }
 
 /*================= Responsive - 480px =============*/
@@ -439,5 +444,10 @@ h3 {
   .cta {
     font-size: 0.9rem;
     padding: 0.4rem 0.8rem;
+  }
+
+  .play-button img {
+    width: 28px;
+    height: 28px;
   }
 }
