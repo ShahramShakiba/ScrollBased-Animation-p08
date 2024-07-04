@@ -24,8 +24,7 @@ html {
   height: 100vh;
   position: relative;
   font-family: 'Cabin', sans-serif;
-  padding-left: 10%;
-  padding-right: 10%;
+  padding: 0 5%;
 }
 
 section:nth-child(odd) {
@@ -48,6 +47,13 @@ h2 {
 
 h3 {
   position: absolute;
+}
+
+.home, .about-me, .contact-me {
+  width: 100%;
+  max-width: 800px; /* Restrict maximum width for better readability */
+  padding: 2rem;
+  text-align: center; /* Center-align text for better layout */
 }
 
 .home p,
