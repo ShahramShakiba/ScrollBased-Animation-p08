@@ -322,7 +322,7 @@ const createSectionAnimations = (section) => {
       autoAlpha: 0,
       scale: 3,
       y: -50,
-      x: 250,
+      // x: 250,
     });
   }
   if (h2) {
@@ -330,7 +330,7 @@ const createSectionAnimations = (section) => {
       duration: 1.5,
       autoAlpha: 0,
       y: -50,
-      x: 150,
+      // x: 150,
       scale: 3,
     });
   }
@@ -338,7 +338,7 @@ const createSectionAnimations = (section) => {
     gsap.from(h3, {
       duration: 1.5,
       autoAlpha: 0,
-      x: -90,
+      // x: -90,
       delay: 0.7,
       rotation: 360,
     });
@@ -347,7 +347,7 @@ const createSectionAnimations = (section) => {
     gsap.from(p, {
       duration: 1.5,
       autoAlpha: 0,
-      x: 350,
+      // x: 350,
       y: 180,
       delay: 0.3,
       stagger: 0.3,
@@ -359,14 +359,14 @@ const createSectionAnimations = (section) => {
       duration: 1.7,
       autoAlpha: 0,
       delay: 0.1,
-      x: -50,
+      // x: -50,
     });
   }
   if (cta) {
     gsap.from(cta, {
       duration: 1.5,
       autoAlpha: 0,
-      x: -190,
+      // x: -190,
       delay: 0.5,
       scale: 0.01,
     });
