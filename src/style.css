@@ -49,11 +49,12 @@ h3 {
   position: absolute;
 }
 
-.home, .about-me, .contact-me {
+.home,
+.about-me,
+.contact-me {
   width: 100%;
-  max-width: 800px; /* Restrict maximum width for better readability */
+  max-width: 800px;
   padding: 2rem;
-  text-align: center; /* Center-align text for better layout */
 }
 
 .home p,
@@ -75,7 +76,8 @@ h3 {
 }
 
 @keyframes bounce {
-  0%, 100% {
+  0%,
+  100% {
     transform: scale(1) rotate(0deg);
   }
   50% {

@@ -7,8 +7,8 @@ const scene = new THREE.Scene();
 let width = window.innerWidth;
 let height = window.innerHeight;
 const objectDistance = 4;
-const trianglesCount = 60;
-const starsCount = 400;
+const trianglesCount = 50;
+const starsCount = 300;
 
 //======================= Texture =======================
 const textureLoader = new THREE.TextureLoader();
@@ -99,9 +99,9 @@ scene.add(triangle, star);
 //=========== Adjust Objects Based on Width ===============
 const adjustObjectsAndParticles = (width) => {
   if (width <= 480) {
-    homeMesh.scale.set(0.5, 0.5, 0.5);
-    aboutMeMesh.scale.set(0.62, 0.62, 0.62);
-    contactMesh.scale.set(0.85, 0.85, 0.85);
+    homeMesh.scale.set(0.4, 0.4, 0.4);
+    aboutMeMesh.scale.set(0.45, 0.45, 0.45);
+    contactMesh.scale.set(0.55, 0.55, 0.55);
 
     homeMesh.position.y = objectDistance * 0.35;
     aboutMeMesh.position.y = -objectDistance * 0.75;
@@ -114,9 +114,9 @@ const adjustObjectsAndParticles = (width) => {
     triangleMaterial.size = 0.7;
     starMaterial.size = 0.25;
   } else if (width <= 768) {
-    homeMesh.scale.set(0.65, 0.65, 0.65);
-    aboutMeMesh.scale.set(0.75, 0.75, 0.75);
-    contactMesh.scale.set(0.75, 0.75, 0.75);
+    homeMesh.scale.set(0.55, 0.55, 0.55);
+    aboutMeMesh.scale.set(0.6, 0.6, 0.6);
+    contactMesh.scale.set(0.6, 0.6, 0.6);
 
     homeMesh.position.y = objectDistance * 0.2;
     aboutMeMesh.position.y = -objectDistance * 0.85;
@@ -132,7 +132,7 @@ const adjustObjectsAndParticles = (width) => {
     // Adjust for large screens
     homeMesh.scale.set(0.85, 0.85, 0.85);
     aboutMeMesh.scale.set(0.9, 0.9, 0.9);
-    contactMesh.scale.set(1, 1, 1);
+    contactMesh.scale.set(0.9, 0.9, 0.9);
 
     homeMesh.position.y = objectDistance * 0.15;
     aboutMeMesh.position.y = -objectDistance * 0.85;
@@ -212,9 +212,9 @@ window.addEventListener('scroll', () => {
 
     gsap.to(objectsContainer[currentSection].rotation, {
       duration: 2,
-      x: '+=4',
-      y: '+=5',
-      z: '+=1.2',
+      x: '+=3',
+      y: '+=4',
+      z: '+=1',
     });
   }
 });
@@ -432,9 +432,9 @@ const tick = () => {
 
   //========== Animate Meshes - 2
   for (const obj of objectsContainer) {
-    obj.rotation.x += deltaTime * 0.4;
-    obj.rotation.y += deltaTime * 0.17;
-    obj.rotation.z += deltaTime * 0.13;
+    obj.rotation.x += deltaTime * 0.18;
+    obj.rotation.y += deltaTime * 0.15;
+    obj.rotation.z += deltaTime * 0.11;
   }
 
   //========== Animate Particles - 6
@@ -452,7 +452,7 @@ const tick = () => {
     const i3 = i * 3;
 
     starGeometry.attributes.position.array[i3] -=
-      Math.cos(elapsedTime + i3) * Math.random() * 0.0022;
+      Math.cos(elapsedTime + i3) * Math.random() * 0.0015;
 
     starGeometry.attributes.position.array[i3 + 1] -=
       Math.sin(elapsedTime + i3) * Math.random() * 0.0012;
