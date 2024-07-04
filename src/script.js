@@ -7,8 +7,8 @@ const scene = new THREE.Scene();
 let width = window.innerWidth;
 let height = window.innerHeight;
 const objectDistance = 4;
-const trianglesCount = 50;
-const starsCount = 300;
+const trianglesCount = 55;
+const starsCount = 400;
 
 //======================= Texture =======================
 const textureLoader = new THREE.TextureLoader();
@@ -105,11 +105,11 @@ const adjustObjectsAndParticles = (width) => {
 
     homeMesh.position.y = objectDistance * 0.35;
     aboutMeMesh.position.y = -objectDistance * 0.75;
-    contactMesh.position.y = -objectDistance * 1.7;
+    contactMesh.position.y = -objectDistance * 2.4;
 
     homeMesh.position.x = 0.65;
     aboutMeMesh.position.x = 0.5;
-    contactMesh.position.x = 0;
+    contactMesh.position.x = -0.5;
 
     triangleMaterial.size = 0.7;
     starMaterial.size = 0.25;
