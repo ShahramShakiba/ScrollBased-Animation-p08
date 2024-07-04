@@ -7,8 +7,8 @@ const scene = new THREE.Scene();
 let width = window.innerWidth;
 let height = window.innerHeight;
 const objectDistance = 4;
-const trianglesCount = 50;
-const starsCount = 300;
+const trianglesCount = 60;
+const starsCount = 400;
 
 //======================= Texture =======================
 const textureLoader = new THREE.TextureLoader();
@@ -21,24 +21,18 @@ starTexture.colorSpace = THREE.SRGBColorSpace;
 //======================= Objects =======================
 const material = new THREE.MeshStandardMaterial({
   color: '#ffeded',
-  roughness: 0.5,
-  metalness: 0.1,
+  roughness: 0.6,
+  metalness: 0.2,
 });
 
-const homeMesh = new THREE.Mesh(
+const homeMesh = new THREE.Mesh(new THREE.DodecahedronGeometry(1, 0), material);
+
+const aboutMeMesh = new THREE.Mesh(
   new THREE.TorusGeometry(0.75, 0.35, 30),
   material
 );
 
-const aboutMeMesh = new THREE.Mesh(
-  new THREE.DodecahedronGeometry(1, 0),
-  material
-);
-
-const contactMesh = new THREE.Mesh(
-  new THREE.ConeGeometry(0.85, 1.5, 7),
-  material
-);
+const contactMesh = new THREE.Mesh(new THREE.ConeGeometry(0.85, 1.5), material);
 
 scene.add(homeMesh, aboutMeMesh, contactMesh);
 
@@ -105,7 +99,7 @@ scene.add(triangle, star);
 //=========== Adjust Objects Based on Width ===============
 const adjustObjectsAndParticles = (width) => {
   if (width <= 480) {
-    homeMesh.scale.set(0.62, 0.62, 0.62);
+    homeMesh.scale.set(0.5, 0.5, 0.5);
     aboutMeMesh.scale.set(0.62, 0.62, 0.62);
     contactMesh.scale.set(0.85, 0.85, 0.85);
 
@@ -118,9 +112,9 @@ const adjustObjectsAndParticles = (width) => {
     contactMesh.position.x = 0;
 
     triangleMaterial.size = 0.7;
-    starMaterial.size = 0.4;
+    starMaterial.size = 0.25;
   } else if (width <= 768) {
-    homeMesh.scale.set(0.75, 0.75, 0.75);
+    homeMesh.scale.set(0.65, 0.65, 0.65);
     aboutMeMesh.scale.set(0.75, 0.75, 0.75);
     contactMesh.scale.set(0.75, 0.75, 0.75);
 
@@ -136,8 +130,8 @@ const adjustObjectsAndParticles = (width) => {
     starMaterial.size = 0.3;
   } else {
     // Adjust for large screens
-    homeMesh.scale.set(1, 1, 1);
-    aboutMeMesh.scale.set(1, 1, 1);
+    homeMesh.scale.set(0.85, 0.85, 0.85);
+    aboutMeMesh.scale.set(0.9, 0.9, 0.9);
     contactMesh.scale.set(1, 1, 1);
 
     homeMesh.position.y = objectDistance * 0.15;
@@ -156,15 +150,15 @@ const adjustObjectsAndParticles = (width) => {
 adjustObjectsAndParticles(width);
 
 //====================== Lights ========================
-const directionalLight = new THREE.DirectionalLight(0x6524fc, 3);
+const directionalLight = new THREE.DirectionalLight(0x518ffc, 3);
 directionalLight.position.set(-7, 8, 5);
 scene.add(directionalLight);
 
 const ambientLight = new THREE.AmbientLight(0x00fffc, 0.15);
 scene.add(ambientLight);
 
-const pointLight = new THREE.PointLight(0xff9000, 11.5, 20);
-pointLight.position.set(2, -4.8, 2.5);
+const pointLight = new THREE.PointLight(0xff9000, 6.5, 10);
+pointLight.position.set(2, -2, 2.5);
 scene.add(pointLight);
 
 //===================== Camera =========================
@@ -218,9 +212,9 @@ window.addEventListener('scroll', () => {
 
     gsap.to(objectsContainer[currentSection].rotation, {
       duration: 2,
-      x: '+=3',
-      y: '+=4',
-      z: '+=1',
+      x: '+=4',
+      y: '+=5',
+      z: '+=1.2',
     });
   }
 });
@@ -254,6 +248,7 @@ playButton.addEventListener('click', () => {
     // Change the icon to play
     playButtonImage.src = './textures/social/music.png';
   } else {
+    audio.currentTime = 0;
     audio.play();
 
     // Change the icon to pause
@@ -317,55 +312,63 @@ const createSectionAnimations = (section) => {
   const h1 = sectionElement.querySelector('h1');
   const h2 = sectionElement.querySelector('h2');
   const h3 = sectionElement.querySelector('h3');
-  const p = sectionElement.querySelector('p');
+  const p = sectionElement.querySelectorAll('p');
   const img = sectionElement.querySelector('.socials');
   const cta = sectionElement.querySelector('.cta');
 
   if (h1) {
     gsap.from(h1, {
       duration: 1.5,
-      opacity: 0,
-      y: -90,
+      autoAlpha: 0,
+      scale: 3,
+      y: -50,
+      x: 250,
     });
   }
   if (h2) {
     gsap.from(h2, {
-      duration: 1.2,
-      opacity: 0,
+      duration: 1.5,
+      autoAlpha: 0,
       y: -50,
+      x: 150,
+      scale: 3,
     });
   }
   if (h3) {
     gsap.from(h3, {
-      duration: 2.5,
-      opacity: 0,
+      duration: 1.5,
+      autoAlpha: 0,
       x: -90,
       delay: 0.7,
+      rotation: 360,
     });
   }
   if (p) {
     gsap.from(p, {
-      duration: 1,
-      opacity: 0,
-      y: 90,
+      duration: 1.5,
+      autoAlpha: 0,
+      x: 350,
+      y: 180,
       delay: 0.3,
       stagger: 0.3,
+      scale: 0.01,
     });
   }
   if (img) {
     gsap.from(img, {
       duration: 1.7,
-      opacity: 0,
+      autoAlpha: 0,
       delay: 0.1,
       x: -50,
     });
   }
   if (cta) {
     gsap.from(cta, {
-      duration: 1,
-      opacity: 0,
-      x: -150,
+      duration: 1.5,
+      autoAlpha: 0,
+      x: -190,
       delay: 0.5,
+      scale: 0.01,
     });
   }
 };
@@ -429,9 +432,9 @@ const tick = () => {
 
   //========== Animate Meshes - 2
   for (const obj of objectsContainer) {
-    obj.rotation.x += deltaTime * 0.18;
+    obj.rotation.x += deltaTime * 0.4;
     obj.rotation.y += deltaTime * 0.17;
-    obj.rotation.z += deltaTime * 0.17;
+    obj.rotation.z += deltaTime * 0.13;
   }
 
   //========== Animate Particles - 6
@@ -449,7 +452,7 @@ const tick = () => {
     const i3 = i * 3;
 
     starGeometry.attributes.position.array[i3] -=
-      Math.cos(elapsedTime + i3) * Math.random() * 0.0012;
+      Math.cos(elapsedTime + i3) * Math.random() * 0.0022;
 
     starGeometry.attributes.position.array[i3 + 1] -=
       Math.sin(elapsedTime + i3) * Math.random() * 0.0012;

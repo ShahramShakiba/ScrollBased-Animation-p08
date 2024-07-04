@@ -68,18 +68,27 @@ h3 {
   margin-top: 3.5rem;
 }
 
+@keyframes bounce {
+  0%, 100% {
+    transform: scale(1) rotate(0deg);
+  }
+  50% {
+    transform: scale(1.2) rotate(20deg);
+  }
+}
+
 .home img {
   width: 100px;
   height: 100px;
   border-radius: 50%;
   margin: 1rem;
   box-shadow: 0 4px 15px rgba(75, 75, 75, 0.3);
-  transition: all 0.27s ease;
+  transition: box-shadow 0.3s ease;
 }
 
 .home img:hover {
-  transform: scale(1.05);
-  box-shadow: 0 4px 20px rgba(88, 82, 77, 0.5);
+  animation: bounce 0.6s ease;
+  box-shadow: 0 8px 20px rgba(75, 75, 75, 0.5);
 }
 
 .home .header {
@@ -97,7 +106,7 @@ h3 {
   color: #ebebeb;
 }
 
-.home .header h3::after {
+/* .home .header h3::after {
   content: '';
   position: absolute;
   left: 0;
@@ -109,9 +118,9 @@ h3 {
   transform: scaleX(0);
   transform-origin: left;
   animation: underlineAnimation 6s linear infinite;
-}
+} */
 
-@keyframes underlineAnimation {
+/* @keyframes underlineAnimation {
   0% {
     transform: scaleX(0);
     transform-origin: left;
@@ -124,12 +133,12 @@ h3 {
     transform: scaleX(0);
     transform-origin: right;
   }
-}
+} */
 
 .home .content h1 {
   background: linear-gradient(
     45deg,
-    #6a11cb,
+    #ad7ee0,
     #2575fc,
     #ffb347,
     #ffcc33,
@@ -387,8 +396,8 @@ h3 {
   }
 
   .play-button img {
-    width:30px;
-    height:30px;
+    width: 30px;
+    height: 30px;
   }
 }
 
