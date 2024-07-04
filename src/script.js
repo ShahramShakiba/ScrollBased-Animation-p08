@@ -105,7 +105,7 @@ const adjustObjectsAndParticles = (width) => {
 
     homeMesh.position.y = objectDistance * 0.35;
     aboutMeMesh.position.y = -objectDistance * 0.75;
-    contactMesh.position.y = -objectDistance * 2.5;
+    contactMesh.position.y = -objectDistance * 1.7;
 
     homeMesh.position.x = 0.65;
     aboutMeMesh.position.x = 0.5;
@@ -124,7 +124,7 @@ const adjustObjectsAndParticles = (width) => {
 
     homeMesh.position.x = 1;
     aboutMeMesh.position.x = 0.5;
-    contactMesh.position.x = 0;
+    contactMesh.position.x = -0.5;
 
     triangleMaterial.size = 0.8;
     starMaterial.size = 0.3;
